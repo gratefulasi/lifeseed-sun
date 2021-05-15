@@ -4,13 +4,13 @@
   "description": "Stack: React, MUI, GraphQL, Next and Apollo",
   "main": "index.js",
   "scripts": {
-    "dev": "next -p 7777",
+    "dev": "next -p 7778",
     "build": "next build",
-    "start": "next start -p 7777",
+    "start": "next start -p 7778",
     "test": "NODE_ENV=test jest --watch"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Zon",
+  "license": "MIT",
   "dependencies": {
     "@apollo/client": "^3.2.9",
     "@apollo/link-error": "^2.0.0-beta.3",
