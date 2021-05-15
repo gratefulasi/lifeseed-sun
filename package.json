@@ -1,12 +1,12 @@
 {
-  "name": "sick-fits-frontend",
+  "name": "lifeseed-sun",
   "version": "2.0.0",
   "description": "Stack: React, MUI, GraphQL, Next and Apollo",
   "main": "index.js",
   "scripts": {
-    "dev": "next -p 7777",
+    "dev": "next",
     "build": "next build",
-    "start": "next start -p 7777",
+    "start": "next start",
     "test": "NODE_ENV=test jest --watch"
   },
   "author": "",
