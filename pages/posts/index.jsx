@@ -5,6 +5,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { makeStyles } from '@material-ui/core/styles';
 import Posts from '../../components/post/Posts';
 import Pagination from '../../components/utils/Pagination';
+import SignInChecker from '../../components/admin/SignInChecker';
 
 const useStyles = makeStyles((theme) => ({
   ...theme.customTheme,
@@ -20,18 +21,20 @@ export default function PresentsPage() {
   const classes = useStyles();
   const page = parseInt(query.page);
   return (
-    <Box style={{ paddingRight: '.7rem' }}>
-      <Box className={classes.toolbar}>
-        <Pagination page={page || 1} type="posts" />
-        <Link href="/post">
-          <IconButton>
-            <AddCircleIcon className={classes.addIcon} />
-          </IconButton>
-        </Link>
-      </Box>
+    <SignInChecker>
+      <Box style={{ paddingRight: '.7rem' }}>
+        <Box className={classes.toolbar}>
+          <Pagination page={page || 1} type="posts" />
+          <Link href="/post">
+            <IconButton>
+              <AddCircleIcon className={classes.addIcon} />
+            </IconButton>
+          </Link>
+        </Box>
 
-      <Posts page={page || 1} />
-      <Pagination page={page || 1} type="posts" />
-    </Box>
+        <Posts page={page || 1} />
+        <Pagination page={page || 1} type="posts" />
+      </Box>
+    </SignInChecker>
   );
 }

@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     justifyContent: 'space-between',
+    marginLeft: '.7rem',
     padding: '.7rem',
   },
 }));
@@ -32,7 +33,7 @@ function Lifeseed() {
             {lifeseed?.lifetree?.image ? (
               <img src={lifeseed?.lifetree?.image} style={{ height: '100%' }} />
             ) : (
-              <IconButton style={{ backgroundColor: 'rgba(255,255,0,1)' }}>
+              <IconButton style={{ backgroundColor: '#fff' }}>
                 <NaturePeopleOutlinedIcon />
               </IconButton>
             )}

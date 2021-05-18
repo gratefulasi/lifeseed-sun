@@ -1,5 +1,5 @@
-import { useMutation, useQuery } from '@apollo/client';
-import React, { useState, useEffect } from 'react';
+import { useMutation } from '@apollo/client';
+import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import Head from 'next/head';
 import {
@@ -16,6 +16,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Router from 'next/router';
+import { ArrowBack } from '@material-ui/icons';
 import useForm from '../../lib/useForm';
 import DisplayError from '../utils/ErrorMessage';
 import { CURRENT_LIFESEED_QUERY } from '../admin/useLifeseed';
@@ -98,7 +99,7 @@ export default function CreateLifetree() {
               {loading ? (
                 <LinearProgress color="secondary" />
               ) : (
-                <Grid container>
+                <Grid container style={{ position: 'relative' }}>
                   <CloudinaryImage setImage={setImage} />
                   <TextField
                     type="text"
@@ -153,6 +154,18 @@ export default function CreateLifetree() {
               )}
             </CardContent>
             <CardActions disableSpacing style={{ position: 'relative' }}>
+              <Button
+                color="primary"
+                onClick={() =>
+                  Router.push({
+                    pathname: '/',
+                  })
+                }
+                endIcon={<ArrowBack />}
+                variant="text"
+              >
+                Start
+              </Button>
               <Button
                 type="submit"
                 style={{ right: '7%', bottom: '10%', position: 'absolute' }}

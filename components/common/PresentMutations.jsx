@@ -12,6 +12,7 @@ export const CREATE_PRESENT_MUTATION = gql`
   mutation CREATE_PRESENT_MUTATION(
     $type: String
     $name: String!
+    $image: String
     $body: String!
     $creationTime: String!
     $price: Int
@@ -20,6 +21,7 @@ export const CREATE_PRESENT_MUTATION = gql`
       data: {
         type: $type
         body: $body
+        image: $image
         creationTime: $creationTime
         name: $name
         price: $price
