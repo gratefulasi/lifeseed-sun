@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Router from 'next/router';
-import { ArrowBack, BackspaceOutlined } from '@material-ui/icons';
+import { ArrowBack } from '@material-ui/icons';
 import useForm from '../../lib/useForm';
 import DisplayError from '../utils/ErrorMessage';
 import CloudinaryImage from '../utils/CloudinaryImage';
@@ -103,10 +103,6 @@ export default function UpdateLifetree({ id }) {
 
   return (
     <>
-      <script
-        src="https://widget.cloudinary.com/v2.0/global/all.js"
-        type="text/javascript"
-      />
       <Head>
         <title>{inputs.name}</title>
       </Head>

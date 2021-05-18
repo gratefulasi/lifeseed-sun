@@ -71,7 +71,7 @@ export default function RequestReset() {
             <Avatar className={classes.adminAvatar}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h1">
               Request a password reset
             </Typography>
             <Error error={error} />

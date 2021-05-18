@@ -71,13 +71,7 @@ export default function PresentUpdate({ id }) {
     data.Present || { name: '', price: '', body: '', image: '' }
   );
   const [updatePresent, { loading: updating, error }] = useMutation(
-    UPDATE_PRESENT_MUTATION,
-    {
-      variables: {
-        id,
-        ...inputs,
-      },
-    }
+    UPDATE_PRESENT_MUTATION
   );
   if (updating)
     return (

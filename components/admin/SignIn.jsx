@@ -83,7 +83,7 @@ export default function SignIn() {
             <Avatar className={classes.adminAvatar}>
               <AccountCircleIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h1">
               Welcome!
             </Typography>
             <Error error={error} />
