@@ -41,7 +41,7 @@ export const openUploadWidget = (callback) => {
   );
 };
 
-export default function cloudinaryImage({ setImage }) {
+export default function cloudinaryImage({ setImage, style }) {
   const beginUpload = () => {
     openUploadWidget((error, photos) => {
       if (!error) {
@@ -58,7 +58,13 @@ export default function cloudinaryImage({ setImage }) {
   return (
     <CloudinaryContext
       cloudName="ezimg"
-      style={{ position: 'absolute', top: '-17%', right: '7%' }}
+      style={
+        style || {
+          position: 'absolute',
+          top: '-17%',
+          right: '7%',
+        }
+      }
     >
       <IconButton
         onClick={() => beginUpload('image')}

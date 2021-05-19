@@ -12,6 +12,7 @@ import {
   CardContent,
   Typography,
   TextField,
+  CircularProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Router from 'next/router';
@@ -99,7 +100,8 @@ export default function UpdateLifetree({ id }) {
       ],
     }
   );
-  if (loading) return <p>Loading...</p>;
+  if (loading || updating) return <CircularProgress />;
+  if (error) return <DisplayError error={error} />;
 
   return (
     <>
