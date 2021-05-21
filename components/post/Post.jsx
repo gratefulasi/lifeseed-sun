@@ -131,9 +131,11 @@ export default function Post({ present }) {
             />
           </Link>
           <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {present.body}
-            </Typography>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: present.body,
+              }}
+            />
           </CardContent>
 
           <CardActions disableSpacing>
