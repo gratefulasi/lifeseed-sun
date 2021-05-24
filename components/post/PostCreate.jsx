@@ -11,13 +11,15 @@ import {
   Grid,
   LinearProgress,
   TextField,
-  Typography,
 } from '@material-ui/core';
 import Router from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useState, useRef } from 'react';
+import { ArrowBack } from '@material-ui/icons';
 import DisplayError from '../utils/ErrorMessage';
 import { perPage } from '../../config';
+import useForm from '../../lib/useForm';
+import { joditConfig } from '../../lib/theme';
 import { PAGINATION_QUERY } from '../utils/Pagination';
 import {
   CREATE_PRESENT_MUTATION,
@@ -38,13 +40,13 @@ export default function PostCreate() {
   const classes = useStyles();
   const now = new Date().toISOString();
   const [content, setContent] = useState('');
-  const [title, setTitle] = useState('');
+  const { inputs, handleChange } = useForm({});
 
   const [createPresent, { data, error, loading }] = useMutation(
     CREATE_PRESENT_MUTATION,
     {
       variables: {
-        name: title,
+        name: inputs.title,
         body: content,
         creationTime: now,
         type: 'POST',
@@ -66,20 +68,13 @@ export default function PostCreate() {
       awaitRefetchQueries: true,
     }
   );
-
   console.log(createPresent);
-
   const editor = useRef(null);
-
-  const config = {
-    readonly: false,
-    height: 400,
-  };
 
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>{inputs.title ? inputs.title : 'Create post'}</title>
       </Head>
       <DisplayError error={error} />
       <Box className={classes.space}>
@@ -91,14 +86,12 @@ export default function PostCreate() {
               pathname: `/posts`,
             });
           }}
+          style={{ margin: 0 }}
         >
           {loading ? (
             <LinearProgress color="secondary" />
           ) : (
             <Card className={classes.cardView}>
-              <Typography variant="h1" className={classes.cardHeader}>
-                Create post
-              </Typography>
               <CardContent>
                 <Grid container style={{ position: 'relative' }}>
                   <TextField
@@ -107,20 +100,20 @@ export default function PostCreate() {
                     id="title"
                     name="title"
                     size="small"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    variant="outlined"
-                    className={classes.field}
-                  />
-                  <JoditEditor
-                    ref={editor}
-                    value={content}
-                    config={config}
-                    tabIndex={1} // tabIndex of textarea
-                    onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-                    onChange={(newContent) => {}}
+                    value={inputs.title}
+                    onChange={handleChange}
+                    variant="filled"
+                    className={classes.titleField}
                   />
                 </Grid>
+                <JoditEditor
+                  ref={editor}
+                  value={content}
+                  config={joditConfig({ readonly: false })}
+                  tabIndex={1} // tabIndex of textarea
+                  onBlur={(newContent) => setContent(newContent)}
+                  onChange={(newContent) => {}}
+                />
               </CardContent>
               <CardActions disableSpacing>
                 <Button
@@ -130,9 +123,10 @@ export default function PostCreate() {
                       pathname: `/posts`,
                     })
                   }
-                  variant="contained"
+                  endIcon={<ArrowBack />}
+                  variant="text"
                 >
-                  List
+                  Back
                 </Button>
                 <Button
                   color="primary"

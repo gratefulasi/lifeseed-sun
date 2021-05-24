@@ -11,7 +11,7 @@ export const LOVE_MUTATION = gql`
 export const CREATE_PRESENT_MUTATION = gql`
   mutation CREATE_PRESENT_MUTATION(
     $type: String
-    $name: String!
+    $name: String
     $image: String
     $body: String!
     $creationTime: String!
