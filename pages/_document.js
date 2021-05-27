@@ -17,6 +17,10 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
             rel="stylesheet"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display&display=swap"
+            rel="stylesheet"
+          />
           <script
             src="https://widget.cloudinary.com/v2.0/global/all.js"
             type="text/javascript"

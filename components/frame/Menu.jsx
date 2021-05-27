@@ -68,7 +68,7 @@ export default function Menu({ lifeseed, openBasket, toggleSearch, signout }) {
               <LanguageIcon />
             </IconButton>
           </Link> */}
-          <Link href="/wallet">
+          <Link href="/vault">
             <IconButton>
               <AccountBalanceWalletIcon />
             </IconButton>
