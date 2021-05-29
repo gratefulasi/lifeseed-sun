@@ -5,8 +5,8 @@ import PhotoIcon from '@material-ui/icons/PhotoCameraOutlined';
 export const openUploadWidget = (callback) => {
   window.cloudinary.openUploadWidget(
     {
-      cloudName: 'ezimg',
-      uploadPreset: 'wobiwbrp',
+      cloudName: 'lifeseed',
+      uploadPreset: 'lifeseed',
       sources: ['local', 'camera'],
       showAdvancedOptions: false,
       // cropping: true,
