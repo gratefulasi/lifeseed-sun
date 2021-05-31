@@ -63,7 +63,11 @@ export default function LifetreeView({ id }) {
               style={{ display: 'flex', flexDirection: 'column' }}
             >
               <Box style={{ padding: '.25rem', marginBottom: '1rem' }}>
-                <Typography variant="body1">{Lifetree.body}</Typography>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: Lifetree.body,
+                  }}
+                />
               </Box>
               <Typography variant="body1">
                 <b>Latitude:</b> {Lifetree.latitude}

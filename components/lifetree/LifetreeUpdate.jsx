@@ -17,6 +17,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import Router from 'next/router';
 import { ArrowBack } from '@material-ui/icons';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import useForm from '../../lib/useForm';
 import DisplayError from '../utils/ErrorMessage';
 import CloudinaryImage from '../utils/CloudinaryImage';
@@ -110,7 +111,7 @@ export default function UpdateLifetree({ id }) {
       </Head>
 
       <Box className={classes.space}>
-        <form
+        <ValidatorForm
           onSubmit={async (e) => {
             e.preventDefault();
             const res = await updateLifetree({
@@ -123,7 +124,6 @@ export default function UpdateLifetree({ id }) {
                 longitude: inputs.longitude,
               },
             }).catch(console.error);
-            console.log(res);
             Router.push({
               pathname: `/lifetree/${res?.data?.updateLifetree?.id}`,
             });
@@ -169,7 +169,7 @@ export default function UpdateLifetree({ id }) {
                     className={classes.field}
                     size="small"
                   />
-                  <TextField
+                  <TextValidator
                     type="text"
                     id="latitude"
                     name="latitude"
@@ -180,8 +180,16 @@ export default function UpdateLifetree({ id }) {
                     variant="outlined"
                     className={classes.field}
                     size="small"
+                    validators={[
+                      'required',
+                      'matchRegexp:^(\\+|-)?(?:90(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,6})?))$',
+                    ]}
+                    errorMessages={[
+                      'Latitude is required',
+                      'Latitude is not valid',
+                    ]}
                   />
-                  <TextField
+                  <TextValidator
                     type="text"
                     id="longitude"
                     name="longitude"
@@ -192,6 +200,14 @@ export default function UpdateLifetree({ id }) {
                     variant="outlined"
                     className={classes.field}
                     size="small"
+                    validators={[
+                      'required',
+                      'matchRegexp:^(\\+|-)?(?:180(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,6})?))$',
+                    ]}
+                    errorMessages={[
+                      'Longitude is required',
+                      'Longitude is not valid',
+                    ]}
                   />
                 </Grid>
               )}
@@ -217,7 +233,7 @@ export default function UpdateLifetree({ id }) {
               </Button>
             </CardActions>
           </Card>
-        </form>
+        </ValidatorForm>
       </Box>
     </>
   );

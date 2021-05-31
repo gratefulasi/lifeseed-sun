@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import gql from 'graphql-tag';
 import Head from 'next/head';
 import {
@@ -17,10 +18,18 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import Router from 'next/router';
 import { ArrowBack } from '@material-ui/icons';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import useForm from '../../lib/useForm';
 import DisplayError from '../utils/ErrorMessage';
 import { CURRENT_LIFESEED_QUERY } from '../admin/useLifeseed';
 import CloudinaryImage from '../utils/CloudinaryImage';
+import { joditConfig } from '../../lib/theme';
+import LifetreePosition from './LifetreePosition';
+
+const importJodit = () => import('jodit-react');
+const JoditEditor = dynamic(importJodit, {
+  ssr: false,
+});
 
 const useStyles = makeStyles((theme) => ({
   ...theme.customTheme,
@@ -57,6 +66,9 @@ const CREATE_LIFETREE_MUTATION = gql`
 export default function CreateLifetree() {
   const classes = useStyles();
   const [image, setImage] = useState();
+  const [loading, setLoading] = useState(false);
+  const [content, setContent] = useState('');
+  const editor = useRef(null);
   const { inputs, handleChange, clearForm } = useForm({
     name: '',
     body: '',
@@ -64,14 +76,14 @@ export default function CreateLifetree() {
     latitude: '',
     longitude: '',
   });
-  const [createLifetree, { data, error, loading }] = useMutation(
+  const [createLifetree, { error, planting }] = useMutation(
     CREATE_LIFETREE_MUTATION,
     {
-      variables: { ...inputs, image },
+      variables: { ...inputs, image, body: content },
       refetchQueries: [{ query: CURRENT_LIFESEED_QUERY }],
     }
   );
-  if (loading) return <CircularProgress />;
+  if (planting || loading) return <CircularProgress />;
 
   return (
     <>
@@ -79,10 +91,11 @@ export default function CreateLifetree() {
         <title>Plant lifetree</title>
       </Head>
       <Box className={classes.space}>
-        <form
+        <ValidatorForm
           onSubmit={async (e) => {
             e.preventDefault();
             const res = await createLifetree();
+            setLoading(true);
             clearForm();
             Router.push({
               pathname: `/lifetree/${res?.data?.createLifetree?.id}`,
@@ -99,58 +112,79 @@ export default function CreateLifetree() {
               {loading ? (
                 <LinearProgress color="secondary" />
               ) : (
-                <Grid container style={{ position: 'relative' }}>
-                  <CloudinaryImage setImage={setImage} />
-                  <TextField
-                    type="text"
-                    id="name"
-                    name="name"
-                    label="Name"
-                    placeholder="Name"
-                    value={inputs.name}
-                    onChange={handleChange}
-                    variant="outlined"
-                    className={classes.field}
-                    size="small"
+                <>
+                  <Grid container style={{ position: 'relative' }}>
+                    <CloudinaryImage
+                      setImage={setImage}
+                      style={{ position: 'absolute', top: '-7%', right: '7%' }}
+                    />
+                    <TextField
+                      type="text"
+                      id="name"
+                      name="name"
+                      label="Name"
+                      placeholder="Name"
+                      value={inputs.name}
+                      onChange={handleChange}
+                      variant="filled"
+                      className={classes.titleField}
+                      size="small"
+                    />
+
+                    <TextValidator
+                      type="text"
+                      id="latitude"
+                      name="latitude"
+                      label="Latitude"
+                      placeholder="Latitude"
+                      value={inputs.latitude}
+                      onChange={handleChange}
+                      variant="outlined"
+                      className={classes.field}
+                      size="small"
+                      validators={[
+                        'required',
+                        'matchRegexp:^(\\+|-)?(?:90(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,6})?))$',
+                      ]}
+                      errorMessages={[
+                        'Latitude is required',
+                        'Latitude is not valid',
+                      ]}
+                    />
+                    <TextValidator
+                      type="text"
+                      id="longitude"
+                      name="longitude"
+                      label="Longitude"
+                      placeholder="Longitude"
+                      value={inputs.longitude}
+                      onChange={handleChange}
+                      variant="outlined"
+                      className={classes.field}
+                      size="small"
+                      validators={[
+                        'required',
+                        'matchRegexp:^(\\+|-)?(?:180(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,6})?))$',
+                      ]}
+                      errorMessages={[
+                        'Longitude is required',
+                        'Longitude is not valid',
+                      ]}
+                    />
+                  </Grid>
+                  <JoditEditor
+                    ref={editor}
+                    value={content}
+                    config={joditConfig({ readonly: false })}
+                    tabIndex={1} // tabIndex of textarea
+                    onBlur={(newContent) => setContent(newContent)}
+                    onChange={(newContent) => {}}
                   />
-                  <TextField
-                    multiline
-                    rows={4}
-                    id="body"
-                    name="body"
-                    label="Body"
-                    placeholder="Body"
-                    value={inputs.body}
-                    onChange={handleChange}
-                    variant="outlined"
-                    className={classes.field}
-                    size="small"
+                  <LifetreePosition
+                    latitude={inputs.latitude}
+                    longitude={inputs.longitude}
                   />
-                  <TextField
-                    type="text"
-                    id="latitude"
-                    name="latitude"
-                    label="Latitude"
-                    placeholder="Latitude"
-                    value={inputs.latitude}
-                    onChange={handleChange}
-                    variant="outlined"
-                    className={classes.field}
-                    size="small"
-                  />
-                  <TextField
-                    type="text"
-                    id="longitude"
-                    name="longitude"
-                    label="Longitude"
-                    placeholder="Longitude"
-                    value={inputs.longitude}
-                    onChange={handleChange}
-                    variant="outlined"
-                    className={classes.field}
-                    size="small"
-                  />
-                </Grid>
+                </>
               )}
             </CardContent>
             <CardActions disableSpacing style={{ position: 'relative' }}>
@@ -174,7 +208,7 @@ export default function CreateLifetree() {
               </Button>
             </CardActions>
           </Card>
-        </form>
+        </ValidatorForm>
       </Box>
     </>
   );

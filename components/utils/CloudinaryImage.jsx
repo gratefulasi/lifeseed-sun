@@ -57,7 +57,7 @@ export default function cloudinaryImage({ setImage, style }) {
   };
   return (
     <CloudinaryContext
-      cloudName="ezimg"
+      cloudName="lifeseed"
       style={
         style || {
           position: 'absolute',
