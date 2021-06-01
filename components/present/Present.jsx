@@ -197,7 +197,7 @@ export default function Present({ present }) {
               <Badge badgeContent={present.loves?.length} color="secondary">
                 {lifeseed ? (
                   present.loves?.find(
-                    (love) => love.lifeseed.id === lifeseed.id
+                    (love) => love.lifeseed?.id === lifeseed.id
                   ) ? (
                     <FavoriteIcon color="secondary" style={{ color: 'red' }} />
                   ) : (
