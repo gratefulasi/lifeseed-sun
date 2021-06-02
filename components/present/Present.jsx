@@ -182,11 +182,13 @@ export default function Present({ present }) {
             title={present.name}
           />
           <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {present.body}
-            </Typography>
+            <Box
+              height="5rem"
+              dangerouslySetInnerHTML={{
+                __html: present.body,
+              }}
+            />
           </CardContent>
-
           <CardActions disableSpacing>
             <IconButton
               aria-label="love"

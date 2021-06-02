@@ -1,35 +1,70 @@
 import { useMutation, useQuery } from '@apollo/client';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
 import gql from 'graphql-tag';
 import Head from 'next/head';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {
+  Avatar,
   Backdrop,
   Box,
   Button,
   CircularProgress,
   Grid,
+  IconButton,
   LinearProgress,
   Card,
   CardActions,
   CardContent,
+  CardHeader,
   Typography,
   TextField,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Router from 'next/router';
 import { ArrowBack } from '@material-ui/icons';
+import moment from 'moment';
 import useForm from '../../lib/useForm';
 import DisplayError from '../utils/ErrorMessage';
 import CloudinaryImage from '../utils/CloudinaryImage';
+import { joditConfig } from '../../lib/theme';
+
+const importJodit = () => import('jodit-react');
+const JoditEditor = dynamic(importJodit, {
+  ssr: false,
+});
 
 const SINGLE_PRESENT_QUERY = gql`
   query SINGLE_PRESENT_QUERY($id: ID!) {
     Present(where: { id: $id }) {
-      name
-      price
       body
-      id
+      comments {
+        id
+        creationTime
+        body
+        lifeseed {
+          id
+          lifetree {
+            image
+          }
+        }
+      }
       image
+      price
+      loves {
+        id
+        lifeseed {
+          id
+        }
+      }
+      creationTime
+      id
+      lifeseed {
+        lifetree {
+          image
+        }
+      }
+      name
     }
   }
 `;
@@ -62,6 +97,7 @@ const UPDATE_PRESENT_MUTATION = gql`
 export default function PresentUpdate({ id }) {
   const classes = useStyles();
   const [image, setImage] = useState();
+  const editor = useRef(null);
   const { data = {}, loading } = useQuery(SINGLE_PRESENT_QUERY, {
     variables: {
       id,
@@ -70,6 +106,7 @@ export default function PresentUpdate({ id }) {
   const { inputs, handleChange } = useForm(
     data.Present || { name: '', price: '', body: '', image: '' }
   );
+  const [content, setContent] = useState(inputs.body);
   const [updatePresent, { loading: updating, error }] = useMutation(
     UPDATE_PRESENT_MUTATION
   );
@@ -91,7 +128,7 @@ export default function PresentUpdate({ id }) {
             e.preventDefault();
             const res = await updatePresent({
               variables: {
-                body: inputs.body,
+                body: content,
                 id,
                 image,
                 name: inputs.name,
@@ -104,58 +141,70 @@ export default function PresentUpdate({ id }) {
           }}
         >
           <Card className={classes.cardView}>
-            <Typography
-              variant="h1"
-              style={{ margin: '1rem', textAlign: 'center', color: '#272727' }}
-            >
-              Update {inputs.name}
-            </Typography>
-            <img className={classes.image} src={image || data.Present?.image} />
+            <CardHeader
+              avatar={
+                <Avatar aria-label="lifetree" className={classes.avatar}>
+                  <img
+                    src={data.Present?.lifeseed?.lifetree?.image}
+                    style={{ height: '100%' }}
+                  />
+                </Avatar>
+              }
+              action={
+                <IconButton aria-label="settings">
+                  <MoreVertIcon />
+                </IconButton>
+              }
+              title={inputs.name}
+              style={{ cursor: 'pointer' }}
+              subheader={moment(data.Present?.creationTime).fromNow()}
+            />
             <CardContent>
+              <img
+                className={classes.image}
+                src={image || data.Present?.image}
+              />
               <DisplayError error={error} />
               {loading ? (
                 <LinearProgress color="secondary" />
               ) : (
-                <Grid container style={{ position: 'relative' }}>
-                  <CloudinaryImage setImage={setImage} />
-                  <TextField
-                    type="text"
-                    id="name"
-                    name="name"
-                    label="Name"
-                    placeholder="Name"
-                    value={inputs.name}
-                    onChange={handleChange}
-                    variant="outlined"
-                    className={classes.field}
-                    size="small"
-                  />
-                  <TextField
-                    type="number"
-                    id="price"
-                    name="price"
-                    label="Price"
-                    placeholder="Price"
-                    value={inputs.price}
-                    onChange={handleChange}
-                    variant="outlined"
-                    className={classes.field}
-                    size="small"
-                  />
-                  <TextField
-                    multiline
-                    rows={7}
-                    id="body"
-                    name="body"
-                    label="Body"
-                    placeholder="Body"
+                <>
+                  <Grid container style={{ position: 'relative' }}>
+                    <CloudinaryImage setImage={setImage} />
+                    <TextField
+                      type="text"
+                      id="name"
+                      name="name"
+                      label="Title"
+                      placeholder="Title"
+                      value={inputs.name}
+                      onChange={handleChange}
+                      variant="filled"
+                      className={classes.field}
+                      size="small"
+                    />
+                    <TextField
+                      type="number"
+                      id="price"
+                      name="price"
+                      label="Price"
+                      placeholder="Price"
+                      value={inputs.price}
+                      onChange={handleChange}
+                      variant="outlined"
+                      className={classes.field}
+                      size="small"
+                    />
+                  </Grid>
+                  <JoditEditor
+                    ref={editor}
                     value={inputs.body}
-                    onChange={handleChange}
-                    variant="outlined"
-                    className={classes.field}
-                    size="small"
+                    config={joditConfig({ readonly: false })}
+                    tabIndex={1} // tabIndex of textarea
+                    onBlur={(newContent) => setContent(newContent)}
+                    onChange={(newContent) => {}}
                   />
-                </Grid>
+                </>
               )}
             </CardContent>
             <CardActions disableSpacing>

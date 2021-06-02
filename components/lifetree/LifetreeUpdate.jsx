@@ -101,11 +101,6 @@ export default function UpdateLifetree({ id }) {
   const [updateLifetree, { loading: updating, error }] = useMutation(
     UPDATE_LIFETREE_MUTATION,
     {
-      variables: {
-        id,
-        ...inputs,
-        image,
-      },
       refetchQueries: [
         { query: SINGLE_LIFETREE_QUERY, variables: { id } },
         { query: CURRENT_LIFESEED_QUERY },

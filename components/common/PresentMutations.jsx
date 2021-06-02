@@ -75,6 +75,19 @@ export const ALL_PRESENTS_QUERY = gql`
   }
 `;
 
+export const ALL_PRESENTS_QUERY_LIGHT = gql`
+  query ALL_PRESENTS_QUERY_LIGHT($skip: Int = 0, $first: Int, $type: String) {
+    allPresents(first: $first, skip: $skip, where: { type: $type }) {
+      body
+      creationTime
+      id
+      image
+      name
+      price
+    }
+  }
+`;
+
 export const DELETE_PRESENT_MUTATION = gql`
   mutation DELETE_PRESENT_MUTATION($id: ID!) {
     deletePresent(id: $id) {
