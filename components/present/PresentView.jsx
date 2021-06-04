@@ -65,7 +65,13 @@ export default function PresentView({ id }) {
               style={{ display: 'flex', flexDirection: 'column' }}
             >
               <Box style={{ padding: '.25rem', marginBottom: '1rem' }}>
-                <Typography>{Present.body}</Typography>
+                <Box
+                  height="5rem"
+                  style={{ overflow: 'hidden' }}
+                  dangerouslySetInnerHTML={{
+                    __html: Present.body,
+                  }}
+                />
               </Box>
               <Typography>Price: {Present.price}</Typography>
             </Grid>

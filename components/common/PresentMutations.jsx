@@ -66,6 +66,7 @@ export const ALL_PRESENTS_QUERY = gql`
       creationTime
       id
       lifeseed {
+        id
         lifetree {
           image
         }

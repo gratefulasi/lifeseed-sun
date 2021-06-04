@@ -184,6 +184,7 @@ export default function Present({ present }) {
           <CardContent>
             <Box
               height="5rem"
+              style={{ overflow: 'hidden' }}
               dangerouslySetInnerHTML={{
                 __html: present.body,
               }}
@@ -226,28 +227,32 @@ export default function Present({ present }) {
             <IconButton aria-label="Comment" onClick={handleAddCommentClick}>
               <AddCommentSharp />
             </IconButton>
-            <IconButton
-              aria-label="delete"
-              disabled={loading}
-              variant="outlined"
-              onClick={() => {
-                setConfirmOpen(true);
-              }}
-            >
-              <DeleteOutlineIcon />
-            </IconButton>
-            <Link
-              href={{
-                pathname: '/updatePresent',
-                query: {
-                  id: present.id,
-                },
-              }}
-            >
-              <IconButton>
-                <EditIcon />
-              </IconButton>
-            </Link>
+            {lifeseed && present?.lifeseed?.id === lifeseed.id && (
+              <>
+                <IconButton
+                  aria-label="delete"
+                  disabled={loading}
+                  variant="outlined"
+                  onClick={() => {
+                    setConfirmOpen(true);
+                  }}
+                >
+                  <DeleteOutlineIcon />
+                </IconButton>
+                <Link
+                  href={{
+                    pathname: '/updatePresent',
+                    query: {
+                      id: present.id,
+                    },
+                  }}
+                >
+                  <IconButton>
+                    <EditIcon />
+                  </IconButton>
+                </Link>
+              </>
+            )}
             <IconButton
               disabled={loading}
               variant="outlined"
