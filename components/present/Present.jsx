@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     borderRadius: '4px',
     fontWeight: 400,
-    padding: '7px',
+    padding: '3px 9px',
     lineHeight: 1,
     fontSize: '1.2rem',
     display: 'inline-block',
@@ -269,7 +269,18 @@ export default function Present({ present }) {
           />
         </Card>
         <Box className={classes.ltcTag}>
-          {present.price / 100} <small>|=|</small>
+          {present.price / 100}{' '}
+          <IconButton
+            aria-label="settings"
+            size="small"
+            style={{
+              backgroundColor: 'yellow',
+              padding: '.3rem',
+              transform: 'scale(0.8)',
+            }}
+          >
+            |=|
+          </IconButton>
         </Box>
         <Box className={classes.priceTag}>{formatPrice(present.price)}</Box>
       </Box>
