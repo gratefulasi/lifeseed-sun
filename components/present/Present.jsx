@@ -276,6 +276,7 @@ export default function Present({ present }) {
             style={{
               backgroundColor: 'yellow',
               padding: '.3rem',
+              fontWeight: 'bold',
               transform: 'scale(0.8)',
             }}
           >
