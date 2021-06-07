@@ -176,11 +176,13 @@ export default function Present({ present }) {
               subheader={moment(present.creationTime).fromNow()}
             />
           </Link>
-          <CardMedia
-            className={classes.media}
-            image={present?.image}
-            title={present.name}
-          />
+          {present?.image && (
+            <CardMedia
+              className={classes.media}
+              image={present?.image}
+              title={present.name}
+            />
+          )}
           <CardContent>
             <Box
               height="5rem"
