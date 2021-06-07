@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import NatureIcon from '@material-ui/icons/NatureOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Error from '../utils/ErrorMessage';
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   ...theme.customTheme,
   signupImage: {
     backgroundImage:
-      'url(https://res.cloudinary.com/ezimg/image/upload/v1618521055/lifeseed/signup_uu9muu.jpg)',
+      'url(https://res.cloudinary.com/lifeseed/image/upload/v1622322226/lifeseed/lifeseed-4_aqjuhc.jpg)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
@@ -78,8 +78,8 @@ export default function SignUp() {
             {data?.createLifeseed && (
               <p>Signed up with {data.createLifeseed.email} - Please sign in</p>
             )}
-            <Avatar className={classes.adminAvatar}>
-              <LockOutlinedIcon />
+            <Avatar className={classes.signupImage}>
+              <NatureIcon />
             </Avatar>
             <Typography component="h1" variant="h1">
               Join

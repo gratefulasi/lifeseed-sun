@@ -5,11 +5,11 @@ import PhotoIcon from '@material-ui/icons/PhotoCameraOutlined';
 export const openUploadWidget = (callback) => {
   window.cloudinary.openUploadWidget(
     {
-      cloudName: 'ezimg',
-      uploadPreset: 'wobiwbrp',
+      cloudName: 'lifeseed',
+      uploadPreset: 'lifeseed',
       sources: ['local', 'camera'],
       showAdvancedOptions: false,
-      cropping: true,
+      // cropping: true,
       multiple: false,
       defaultSource: 'camera',
       styles: {
@@ -41,7 +41,7 @@ export const openUploadWidget = (callback) => {
   );
 };
 
-export default function cloudinaryImage({ setImage }) {
+export default function cloudinaryImage({ setImage, style }) {
   const beginUpload = () => {
     openUploadWidget((error, photos) => {
       if (!error) {
@@ -57,8 +57,14 @@ export default function cloudinaryImage({ setImage }) {
   };
   return (
     <CloudinaryContext
-      cloudName="ezimg"
-      style={{ position: 'absolute', top: '-17%', right: '7%' }}
+      cloudName="lifeseed"
+      style={
+        style || {
+          position: 'absolute',
+          top: '-17%',
+          right: '7%',
+        }
+      }
     >
       <IconButton
         onClick={() => beginUpload('image')}

@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import NatureIcon from '@material-ui/icons/NatureOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Error from '../utils/ErrorMessage';
@@ -40,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
   ...theme.customTheme,
   loginImage: {
     backgroundImage:
-      'url(https://res.cloudinary.com/ezimg/image/upload/v1618246418/lifeseed/signin_xzwln8.jpg)',
+      'url(https://res.cloudinary.com/lifeseed/image/upload/v1622318391/lifeseed/signin_trezfg.jpg)',
+    // 'url(https://res.cloudinary.com/ezimg/image/upload/v1618246418/lifeseed/signin_xzwln8.jpg)',
     // 'url(https://res.cloudinary.com/ezimg/image/upload/ar_1,c_fill,r_max/v1618246418/lifeseed/signin_xzwln8.jpg)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -80,8 +81,8 @@ export default function SignIn() {
         <Grid item xs={false} sm={4} md={7} className={classes.loginImage} />
         <Grid item xs={12} sm={8} md={5}>
           <Paper className={classes.adminPaper} elevation={3}>
-            <Avatar className={classes.adminAvatar}>
-              <AccountCircleIcon />
+            <Avatar className={classes.loginImage}>
+              <NatureIcon />
             </Avatar>
             <Typography component="h1" variant="h1">
               Welcome!

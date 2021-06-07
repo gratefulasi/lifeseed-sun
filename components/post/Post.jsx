@@ -131,9 +131,11 @@ export default function Post({ present }) {
             />
           </Link>
           <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {present.body}
-            </Typography>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: present.body,
+              }}
+            />
           </CardContent>
 
           <CardActions disableSpacing>
@@ -146,7 +148,7 @@ export default function Post({ present }) {
               <Badge badgeContent={present.loves?.length} color="secondary">
                 {lifeseed ? (
                   present.loves?.find(
-                    (love) => love.lifeseed.id === lifeseed.id
+                    (love) => love.lifeseed?.id === lifeseed.id
                   ) ? (
                     <FavoriteIcon color="secondary" style={{ color: 'red' }} />
                   ) : (

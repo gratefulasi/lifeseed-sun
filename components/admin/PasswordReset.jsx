@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   ...theme.customTheme,
   resetImage: {
     backgroundImage:
-      'url(https://res.cloudinary.com/ezimg/image/upload/v1618617873/lifeseed/59b3485be0f19.image_jnn6tx.jpg)',
+      'url(https://res.cloudinary.com/lifeseed/image/upload/v1622322878/lifeseed/607f4ea304aafe986875c777_i6jujd.jpg)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light'
@@ -77,8 +77,8 @@ export default function Reset({ token }) {
         <Grid item xs={false} sm={4} md={7} className={classes.resetImage} />
         <Grid item xs={12} sm={8} md={5}>
           <Paper className={classes.adminPaper} elevation={3}>
-            <Avatar className={classes.adminAvatar}>
-              <LockOutlinedIcon />
+            <Avatar className={classes.resetImage}>
+              <NatureIcon />
             </Avatar>
             <Typography component="h1" variant="h1">
               Reset password

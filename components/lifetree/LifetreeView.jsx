@@ -12,9 +12,11 @@ import {
   CardContent,
   CircularProgress,
   Grid,
+  IconButton,
   Typography,
 } from '@material-ui/core';
 import MapIcon from '@material-ui/icons/Map';
+import NatureIcon from '@material-ui/icons/Nature';
 // import LifetreePosition from './LifetreePosition';
 
 const useStyles = makeStyles((theme) => ({
@@ -51,9 +53,16 @@ export default function LifetreeView({ id }) {
       </Head>
       <Box className={classes.space}>
         <Card className={classes.cardView}>
-          <Typography variant="h1" className={classes.cardHeader}>
-            {Lifetree.name}
-          </Typography>
+          <Box display="flex" justifyContent="space-between">
+            <Box margin="1rem" marginRight="0">
+              <IconButton style={{ padding: '.5rem' }}>
+                <NatureIcon />
+              </IconButton>
+            </Box>
+            <Typography variant="h1" className={classes.cardHeader}>
+              {Lifetree.name}
+            </Typography>
+          </Box>
           <Box style={{ display: 'grid', justifyContent: 'center' }}>
             <img className={classes.image} src={Lifetree?.image} />
           </Box>
@@ -63,7 +72,11 @@ export default function LifetreeView({ id }) {
               style={{ display: 'flex', flexDirection: 'column' }}
             >
               <Box style={{ padding: '.25rem', marginBottom: '1rem' }}>
-                <Typography variant="body1">{Lifetree.body}</Typography>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: Lifetree.body,
+                  }}
+                />
               </Box>
               <Typography variant="body1">
                 <b>Latitude:</b> {Lifetree.latitude}

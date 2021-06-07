@@ -11,7 +11,7 @@ export const LOVE_MUTATION = gql`
 export const CREATE_PRESENT_MUTATION = gql`
   mutation CREATE_PRESENT_MUTATION(
     $type: String
-    $name: String!
+    $name: String
     $image: String
     $body: String!
     $creationTime: String!
@@ -66,11 +66,25 @@ export const ALL_PRESENTS_QUERY = gql`
       creationTime
       id
       lifeseed {
+        id
         lifetree {
           image
         }
       }
       name
+    }
+  }
+`;
+
+export const ALL_PRESENTS_QUERY_LIGHT = gql`
+  query ALL_PRESENTS_QUERY_LIGHT($skip: Int = 0, $first: Int, $type: String) {
+    allPresents(first: $first, skip: $skip, where: { type: $type }) {
+      body
+      creationTime
+      id
+      image
+      name
+      price
     }
   }
 `;

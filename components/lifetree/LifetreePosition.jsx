@@ -1,13 +1,13 @@
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-export default function LifetreeView({ latitude, longitude }) {
+export default function LifetreePosition({ latitude, longitude }) {
   return (
     <MapContainer
       center={[latitude, longitude]}
-      zoom={13}
+      zoom={3}
       scrollWheelZoom={false}
-      style={{ height: '79vh', width: '100%', opacity: 1 }}
+      style={{ height: '5rem', width: '100%', opacity: 1 }}
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

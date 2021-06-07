@@ -13,12 +13,20 @@ import LanguageIcon from '@material-ui/icons/Language';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import SearchIcon from '@material-ui/icons/Search';
 import ExitToApp from '@material-ui/icons/ExitToApp';
+import { useTheme } from '@material-ui/core/styles';
 
 export default function Menu({ lifeseed, openBasket, toggleSearch, signout }) {
+  const theme = useTheme();
+  const selectedColor = theme.palette.primary.background;
+
   return (
     <>
       <Link href="/presents">
-        <IconButton>
+        <IconButton
+          style={{
+            color: window.location.pathname === '/presents' && selectedColor,
+          }}
+        >
           <StorefrontIcon />
         </IconButton>
       </Link>
@@ -28,7 +36,11 @@ export default function Menu({ lifeseed, openBasket, toggleSearch, signout }) {
       {lifeseed && (
         <>
           <Link href="/posts">
-            <IconButton>
+            <IconButton
+              style={{
+                color: window.location.pathname === '/posts' && selectedColor,
+              }}
+            >
               <ForumIcon />
             </IconButton>
           </Link>
@@ -59,7 +71,11 @@ export default function Menu({ lifeseed, openBasket, toggleSearch, signout }) {
             </IconButton>
           </Link> */}
           <Link href="/map">
-            <IconButton>
+            <IconButton
+              style={{
+                color: window.location.pathname === '/map' && selectedColor,
+              }}
+            >
               <MapIcon />
             </IconButton>
           </Link>
@@ -68,8 +84,12 @@ export default function Menu({ lifeseed, openBasket, toggleSearch, signout }) {
               <LanguageIcon />
             </IconButton>
           </Link> */}
-          <Link href="/wallet">
-            <IconButton>
+          <Link href="/vault">
+            <IconButton
+              style={{
+                color: window.location.pathname === '/vault' && selectedColor,
+              }}
+            >
               <AccountBalanceWalletIcon />
             </IconButton>
           </Link>

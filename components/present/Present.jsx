@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     borderRadius: '4px',
     fontWeight: 400,
-    padding: '7px',
+    padding: '3px 9px',
     lineHeight: 1,
     fontSize: '1.2rem',
     display: 'inline-block',
@@ -176,17 +176,22 @@ export default function Present({ present }) {
               subheader={moment(present.creationTime).fromNow()}
             />
           </Link>
-          <CardMedia
-            className={classes.media}
-            image={present?.image}
-            title={present.name}
-          />
+          {present?.image && (
+            <CardMedia
+              className={classes.media}
+              image={present?.image}
+              title={present.name}
+            />
+          )}
           <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {present.body}
-            </Typography>
+            <Box
+              height="5rem"
+              style={{ overflow: 'hidden' }}
+              dangerouslySetInnerHTML={{
+                __html: present.body,
+              }}
+            />
           </CardContent>
-
           <CardActions disableSpacing>
             <IconButton
               aria-label="love"
@@ -197,7 +202,7 @@ export default function Present({ present }) {
               <Badge badgeContent={present.loves?.length} color="secondary">
                 {lifeseed ? (
                   present.loves?.find(
-                    (love) => love.lifeseed.id === lifeseed.id
+                    (love) => love.lifeseed?.id === lifeseed.id
                   ) ? (
                     <FavoriteIcon color="secondary" style={{ color: 'red' }} />
                   ) : (
@@ -224,28 +229,32 @@ export default function Present({ present }) {
             <IconButton aria-label="Comment" onClick={handleAddCommentClick}>
               <AddCommentSharp />
             </IconButton>
-            <IconButton
-              aria-label="delete"
-              disabled={loading}
-              variant="outlined"
-              onClick={() => {
-                setConfirmOpen(true);
-              }}
-            >
-              <DeleteOutlineIcon />
-            </IconButton>
-            <Link
-              href={{
-                pathname: '/updatePresent',
-                query: {
-                  id: present.id,
-                },
-              }}
-            >
-              <IconButton>
-                <EditIcon />
-              </IconButton>
-            </Link>
+            {lifeseed && present?.lifeseed?.id === lifeseed.id && (
+              <>
+                <IconButton
+                  aria-label="delete"
+                  disabled={loading}
+                  variant="outlined"
+                  onClick={() => {
+                    setConfirmOpen(true);
+                  }}
+                >
+                  <DeleteOutlineIcon />
+                </IconButton>
+                <Link
+                  href={{
+                    pathname: '/updatePresent',
+                    query: {
+                      id: present.id,
+                    },
+                  }}
+                >
+                  <IconButton>
+                    <EditIcon />
+                  </IconButton>
+                </Link>
+              </>
+            )}
             <IconButton
               disabled={loading}
               variant="outlined"
@@ -262,7 +271,19 @@ export default function Present({ present }) {
           />
         </Card>
         <Box className={classes.ltcTag}>
-          {present.price / 100} <small>|=|</small>
+          {present.price / 100}{' '}
+          <IconButton
+            aria-label="settings"
+            size="small"
+            style={{
+              backgroundColor: 'yellow',
+              padding: '.3rem',
+              fontWeight: 'bold',
+              transform: 'scale(0.8)',
+            }}
+          >
+            |=|
+          </IconButton>
         </Box>
         <Box className={classes.priceTag}>{formatPrice(present.price)}</Box>
       </Box>

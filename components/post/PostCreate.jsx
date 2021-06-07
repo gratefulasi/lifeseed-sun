@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import { useTranslation } from 'react-i18next';
 import {
   Box,
@@ -10,13 +11,15 @@ import {
   Grid,
   LinearProgress,
   TextField,
-  Typography,
 } from '@material-ui/core';
 import Router from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
-import useForm from '../../lib/useForm';
+import React, { useState, useRef } from 'react';
+import { ArrowBack } from '@material-ui/icons';
 import DisplayError from '../utils/ErrorMessage';
 import { perPage } from '../../config';
+import useForm from '../../lib/useForm';
+import { joditConfig } from '../../lib/theme';
 import { PAGINATION_QUERY } from '../utils/Pagination';
 import {
   CREATE_PRESENT_MUTATION,
@@ -27,20 +30,27 @@ const useStyles = makeStyles((theme) => ({
   ...theme.customTheme,
 }));
 
+const importJodit = () => import('jodit-react');
+const JoditEditor = dynamic(importJodit, {
+  ssr: false,
+});
+
 export default function PostCreate() {
   const { t } = useTranslation();
   const classes = useStyles();
   const now = new Date().toISOString();
-
-  const { inputs, handleChange, clearForm, resetForm } = useForm({
-    name: '',
-    body: '',
-  });
+  const [content, setContent] = useState('');
+  const { inputs, handleChange } = useForm({});
 
   const [createPresent, { data, error, loading }] = useMutation(
     CREATE_PRESENT_MUTATION,
     {
-      variables: { ...inputs, creationTime: now, type: 'POST' },
+      variables: {
+        name: inputs.title,
+        body: content,
+        creationTime: now,
+        type: 'POST',
+      },
       refetchQueries: [
         {
           query: ALL_PRESENTS_QUERY,
@@ -58,12 +68,13 @@ export default function PostCreate() {
       awaitRefetchQueries: true,
     }
   );
-
   console.log(createPresent);
+  const editor = useRef(null);
+
   return (
     <>
       <Head>
-        <title>{inputs.name}</title>
+        <title>{inputs.title ? inputs.title : 'Create post'}</title>
       </Head>
       <DisplayError error={error} />
       <Box className={classes.space}>
@@ -71,46 +82,38 @@ export default function PostCreate() {
           onSubmit={async (e) => {
             e.preventDefault();
             createPresent();
-            clearForm();
             Router.push({
               pathname: `/posts`,
             });
           }}
+          style={{ margin: 0 }}
         >
           {loading ? (
             <LinearProgress color="secondary" />
           ) : (
             <Card className={classes.cardView}>
-              <Typography variant="h1" className={classes.cardHeader}>
-                Create post
-              </Typography>
               <CardContent>
                 <Grid container style={{ position: 'relative' }}>
                   <TextField
                     aria-label={t('Title')}
                     label={t('Title')}
-                    id="name"
-                    name="name"
+                    id="title"
+                    name="title"
                     size="small"
-                    value={inputs.name}
+                    value={inputs.title}
                     onChange={handleChange}
-                    variant="outlined"
-                    className={classes.field}
-                  />
-                  <TextField
-                    aria-label={t('Body')}
-                    label={t('Body')}
-                    id="body"
-                    name="body"
-                    size="small"
-                    value={inputs.body}
-                    onChange={handleChange}
-                    multiline
-                    rows={7}
-                    variant="outlined"
-                    className={classes.field}
+                    variant="filled"
+                    className={classes.titleField}
                   />
                 </Grid>
+                <JoditEditor
+                  ref={editor}
+                  value={content}
+                  config={joditConfig({ readonly: false })}
+                  tabIndex={1} // tabIndex of textarea
+                  onBlur={(newContent) => setContent(newContent)}
+                  onChange={(newContent) => {}}
+                />
               </CardContent>
               <CardActions disableSpacing>
                 <Button
@@ -120,9 +123,10 @@ export default function PostCreate() {
                       pathname: `/posts`,
                     })
                   }
-                  variant="contained"
+                  endIcon={<ArrowBack />}
+                  variant="text"
                 >
-                  List
+                  Back
                 </Button>
                 <Button
                   color="primary"
