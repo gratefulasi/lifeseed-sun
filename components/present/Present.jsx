@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import Router from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
@@ -26,6 +27,7 @@ import AddCommentSharp from '@material-ui/icons/AddCommentSharp';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import moment from 'moment';
 import formatPrice from '../../lib/formatter';
 import { CURRENT_LIFESEED_QUERY, useLifeseed } from '../admin/useLifeseed';
@@ -108,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Present({ present }) {
+export default function Present({ present, singleView }) {
   const { id } = present;
   const lifeseed = useLifeseed();
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -155,7 +157,10 @@ export default function Present({ present }) {
   return (
     <>
       <Box style={{ position: 'relative', maxWidth: 350 }}>
-        <Card className={classes.root}>
+        <Card
+          className={classes.root}
+          style={{ width: singleView ? '100%' : '' }}
+        >
           <Link href={`/present/${present.id}`}>
             <CardHeader
               avatar={
@@ -193,6 +198,19 @@ export default function Present({ present }) {
             />
           </CardContent>
           <CardActions disableSpacing>
+            {singleView && (
+              <IconButton
+                aria-label="back"
+                variant="outlined"
+                onClick={() =>
+                  Router.push({
+                    pathname: `/presents`,
+                  })
+                }
+              >
+                <ArrowBackIosIcon />
+              </IconButton>
+            )}
             <IconButton
               aria-label="love"
               onClick={() => {
