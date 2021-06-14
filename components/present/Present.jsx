@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     right: '-3px',
     boxShadow: '5px 3px 3px  #FFFFFF',
   },
-  ltcTag: {
+  valueTag: {
     background: theme.palette.primary.main,
     transform: 'rotate(-3deg)',
     color: 'white',
@@ -288,20 +288,27 @@ export default function Present({ present, singleView }) {
             lifeseed={lifeseed}
           />
         </Card>
-        <Box className={classes.ltcTag}>
-          {present.price / 100}{' '}
-          <IconButton
-            aria-label="settings"
-            size="small"
-            style={{
-              backgroundColor: 'yellow',
-              padding: '.3rem',
-              fontWeight: 'bold',
-              transform: 'scale(0.8)',
-            }}
-          >
-            |=|
-          </IconButton>
+        <Box className={classes.valueTag}>
+          {!present.value || present.value === '0' ? (
+            <Box padding=".3rem">Free</Box>
+          ) : (
+            <>
+              {' '}
+              {present.value / 100}{' '}
+              <IconButton
+                aria-label="settings"
+                size="small"
+                style={{
+                  backgroundColor: 'yellow',
+                  padding: '.3rem',
+                  fontWeight: 'bold',
+                  transform: 'scale(0.8)',
+                }}
+              >
+                |=|
+              </IconButton>
+            </>
+          )}
         </Box>
         <Box className={classes.priceTag}>{formatPrice(present.price)}</Box>
       </Box>

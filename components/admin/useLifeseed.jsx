@@ -17,6 +17,7 @@ export const CURRENT_LIFESEED_QUERY = gql`
           present {
             id
             image
+            value
             price
             name
             body

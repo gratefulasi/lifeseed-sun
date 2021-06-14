@@ -40,6 +40,7 @@ export default function PresentCreate() {
     name: '',
     image: '',
     price: 0,
+    value: 0,
     body: '',
   });
 
@@ -102,6 +103,18 @@ export default function PresentCreate() {
                     size="small"
                     value={inputs.name}
                     onChange={handleChange}
+                    variant="outlined"
+                    className={classes.field}
+                  />
+                  <TextField
+                    aria-label={t('Value')}
+                    label={t('Value')}
+                    id="value"
+                    name="value"
+                    size="small"
+                    value={inputs.value}
+                    onChange={handleChange}
+                    type="number"
                     variant="outlined"
                     className={classes.field}
                   />

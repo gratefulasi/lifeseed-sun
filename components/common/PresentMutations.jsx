@@ -16,6 +16,7 @@ export const CREATE_PRESENT_MUTATION = gql`
     $body: String!
     $creationTime: String!
     $price: Int
+    $value: Int
   ) {
     createPresent(
       data: {
@@ -25,6 +26,7 @@ export const CREATE_PRESENT_MUTATION = gql`
         creationTime: $creationTime
         name: $name
         price: $price
+        value: $value
         status: "AVAILABLE"
       }
     ) {
@@ -57,6 +59,7 @@ export const ALL_PRESENTS_QUERY = gql`
       }
       image
       price
+      value
       loves {
         id
         lifeseed {
@@ -85,6 +88,7 @@ export const ALL_PRESENTS_QUERY_LIGHT = gql`
       image
       name
       price
+      value
     }
   }
 `;
@@ -113,6 +117,7 @@ export const SINGLE_PRESENT_QUERY = gql`
       id
       image
       price
+      value
       lifeseed {
         lifetree {
           image

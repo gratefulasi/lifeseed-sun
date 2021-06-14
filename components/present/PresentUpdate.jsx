@@ -51,6 +51,7 @@ const SINGLE_PRESENT_QUERY = gql`
       }
       image
       price
+      value
       loves {
         id
         lifeseed {
@@ -80,9 +81,16 @@ const UPDATE_PRESENT_MUTATION = gql`
     $image: String
     $name: String
     $price: Int
+    $value: Int
   ) {
     updatePresent(
-      data: { body: $body, image: $image, name: $name, price: $price }
+      data: {
+        body: $body
+        image: $image
+        name: $name
+        price: $price
+        value: $value
+      }
       id: $id
     ) {
       body
@@ -90,6 +98,7 @@ const UPDATE_PRESENT_MUTATION = gql`
       image
       name
       price
+      value
     }
   }
 `;
@@ -104,7 +113,7 @@ export default function PresentUpdate({ id }) {
     },
   });
   const { inputs, handleChange } = useForm(
-    data.Present || { name: '', price: '', body: '', image: '' }
+    data.Present || { name: '', price: '', value: '', body: '', image: '' }
   );
   const [content, setContent] = useState(inputs.body);
   const [updatePresent, { loading: updating, error }] = useMutation(
@@ -133,6 +142,7 @@ export default function PresentUpdate({ id }) {
                 image,
                 name: inputs.name,
                 price: inputs.price,
+                value: inputs.value,
               },
             }).catch(console.error);
             Router.push({
@@ -180,6 +190,18 @@ export default function PresentUpdate({ id }) {
                       value={inputs.name}
                       onChange={handleChange}
                       variant="filled"
+                      className={classes.field}
+                      size="small"
+                    />
+                    <TextField
+                      type="number"
+                      id="value"
+                      name="value"
+                      label="Value"
+                      placeholder="Value"
+                      value={inputs.value}
+                      onChange={handleChange}
+                      variant="outlined"
                       className={classes.field}
                       size="small"
                     />

@@ -21,6 +21,7 @@ const LIFESEED_PACKAGES_QUERY = gql`
         name
         body
         price
+        value
         quantity
       }
     }

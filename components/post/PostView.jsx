@@ -24,6 +24,7 @@ const SINGLE_ITEM_QUERY = gql`
     Present(where: { id: $id }) {
       name
       price
+      value
       body
       id
       image
