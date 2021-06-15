@@ -111,6 +111,9 @@ export const SINGLE_PRESENT_QUERY = gql`
         body
         lifeseed {
           id
+          lifetree {
+            image
+          }
         }
       }
       creationTime
@@ -119,12 +122,16 @@ export const SINGLE_PRESENT_QUERY = gql`
       price
       value
       lifeseed {
+        id
         lifetree {
           image
         }
       }
       loves {
         id
+        lifeseed {
+          id
+        }
       }
       name
     }

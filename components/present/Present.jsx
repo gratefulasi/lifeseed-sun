@@ -17,7 +17,6 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -79,35 +78,6 @@ const useStyles = makeStyles((theme) => ({
     right: '-3px',
     boxShadow: '5px 3px 3px  #FFFFFF',
   },
-  title: {
-    margin: '0 1rem',
-    textAlign: 'center',
-    transform: 'skew(-5deg) rotate(-1deg)',
-    marginTop: '-3rem',
-    textShadow: '2px 2px 0 rgba(0, 0, 0, 0.1)',
-    '& a': {
-      background: theme.palette.secondary.main,
-      display: 'inline',
-      lineHeight: '1.3',
-      fontSize: '4rem',
-      textAlign: 'center',
-      color: 'white',
-      padding: '0 1rem',
-    },
-  },
-  root: {
-    maxWidth: 340,
-    minWidth: 320,
-    margin: '1.2rem',
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-  avatar: {
-    backgroundColor: 'violet',
-    border: '1px solid lightgrey',
-  },
 }));
 
 export default function Present({ present, singleView }) {
@@ -156,11 +126,8 @@ export default function Present({ present, singleView }) {
   const classes = useStyles();
   return (
     <>
-      <Box style={{ position: 'relative', maxWidth: 350 }}>
-        <Card
-          className={classes.root}
-          style={{ width: singleView ? '100%' : '' }}
-        >
+      <Box style={{ position: 'relative' }}>
+        <Card className={singleView ? classes.singleCard : classes.card}>
           <Link href={`/present/${present.id}`}>
             <CardHeader
               avatar={
@@ -218,14 +185,11 @@ export default function Present({ present, singleView }) {
               }}
             >
               <Badge badgeContent={present.loves?.length} color="secondary">
-                {lifeseed ? (
-                  present.loves?.find(
-                    (love) => love.lifeseed?.id === lifeseed.id
-                  ) ? (
-                    <FavoriteIcon color="secondary" style={{ color: 'red' }} />
-                  ) : (
-                    <FavoriteIcon />
-                  )
+                {lifeseed &&
+                present.loves?.find(
+                  (love) => love.lifeseed?.id === lifeseed.id
+                ) ? (
+                  <FavoriteIcon color="secondary" style={{ color: 'red' }} />
                 ) : (
                   <FavoriteIcon />
                 )}
@@ -282,7 +246,7 @@ export default function Present({ present, singleView }) {
             </IconButton>
           </CardActions>
           <CommentPresent
-            commentsExpanded={commentsExpanded}
+            commentsExpanded={singleView || commentsExpanded}
             addCommentExpanded={addCommentExpanded}
             present={present}
             lifeseed={lifeseed}
