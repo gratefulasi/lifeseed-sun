@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import { makeStyles } from '@material-ui/core/styles';
@@ -45,6 +45,19 @@ const useStyles = makeStyles((theme) => ({
 export default function Vault() {
   const classes = useStyles();
   const lifeseed = useLifeseed();
+  const [availableBalance, setAvailableBalance] = useState('');
+  const now = new Date().getTime();
+
+  useEffect(() => {
+    const interval = setInterval(
+      () => setAvailableBalance(new Date().getTime() - now),
+      1000
+    );
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -52,7 +65,7 @@ export default function Vault() {
       </Head>
 
       <Box className={classes.space}>
-        <Card className={classes.cardView}>
+        <Card className={classes.singleCard}>
           <CardHeader
             avatar={
               <Avatar aria-label="lifetree">
@@ -74,7 +87,10 @@ export default function Vault() {
               style={{ display: 'flex', flexDirection: 'column' }}
             >
               <Typography variant="h2" className={classes.vaultData}>
-                Balance:
+                Starting balance:
+              </Typography>
+              <Typography variant="h5" className={classes.vaultData}>
+                Based on lifetrees planted
               </Typography>
               <Grid
                 container
@@ -86,6 +102,38 @@ export default function Vault() {
               >
                 <Typography variant="h4" className={classes.vaultData}>
                   {(1 / 7) * 1000000}
+                </Typography>
+                <Box>
+                  <IconButton
+                    aria-label="settings"
+                    size="small"
+                    style={{
+                      backgroundColor: 'yellow',
+                      padding: '.3rem',
+                      marginTop: '.1rem',
+                      border: '1px solid grey',
+                    }}
+                  >
+                    |=|
+                  </IconButton>
+                </Box>
+              </Grid>
+              <Typography variant="h2" className={classes.vaultData}>
+                Available balance:
+              </Typography>
+              <Typography variant="h5" className={classes.vaultData}>
+                Based on the time of planting and flow
+              </Typography>
+              <Grid
+                container
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                }}
+              >
+                <Typography variant="h4" className={classes.vaultData}>
+                  {availableBalance}
                 </Typography>
                 <Box>
                   <IconButton

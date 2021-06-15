@@ -80,7 +80,12 @@ export default function LifetreeCreate() {
   const [createLifetree, { error, planting }] = useMutation(
     CREATE_LIFETREE_MUTATION,
     {
-      variables: { ...inputs, image, body: content },
+      variables: {
+        ...inputs,
+        image,
+        body: content,
+        planttime: new Date().toISOString(),
+      },
       refetchQueries: [{ query: CURRENT_LIFESEED_QUERY }],
     }
   );
