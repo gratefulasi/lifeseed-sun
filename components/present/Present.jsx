@@ -157,7 +157,7 @@ export default function Present({ present, singleView }) {
           )}
           <CardContent>
             <Box
-              height="5rem"
+              height={singleView ? '100%' : '5rem'}
               style={{ overflow: 'hidden' }}
               dangerouslySetInnerHTML={{
                 __html: present.body,

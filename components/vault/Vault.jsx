@@ -51,7 +51,7 @@ export default function Vault() {
   useEffect(() => {
     const interval = setInterval(
       () => setAvailableBalance(new Date().getTime() - now),
-      1000
+      700
     );
     return () => {
       clearInterval(interval);
