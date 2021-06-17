@@ -28,6 +28,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import moment from 'moment';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import clsx from 'clsx';
 import formatPrice from '../../lib/formatter';
 import { CURRENT_LIFESEED_QUERY, useLifeseed } from '../admin/useLifeseed';
 import CommentPresent from '../common/CommentPresent';
@@ -83,6 +85,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Present({ present, singleView }) {
   const { id } = present;
   const lifeseed = useLifeseed();
+  const classes = useStyles();
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [addCommentExpanded, setAddCommentExpanded] = useState(false);
   const [commentsExpanded, setCommentsExpanded] = useState(false);
@@ -105,7 +108,7 @@ export default function Present({ present, singleView }) {
 
   const [love] = useMutation(LOVE_MUTATION, {
     variables: {
-      id: present.id,
+      id,
     },
     refetchQueries: [
       {
@@ -123,7 +126,6 @@ export default function Present({ present, singleView }) {
     refetchQueries: [{ query: CURRENT_LIFESEED_QUERY }],
   });
 
-  const classes = useStyles();
   return (
     <>
       <Box style={{ position: 'relative' }}>
@@ -243,6 +245,16 @@ export default function Present({ present, singleView }) {
               onClick={addToBasket}
             >
               <AddShoppingCartIcon />
+            </IconButton>
+            <IconButton
+              className={clsx(classes.expand, {
+                [classes.expandOpen]: commentsExpanded,
+              })}
+              onClick={handleExpandCommentsClick}
+              aria-expanded={commentsExpanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
             </IconButton>
           </CardActions>
           <CommentPresent
