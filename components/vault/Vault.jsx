@@ -79,6 +79,7 @@ export default function Vault() {
             }
             title="The vault of your leaves"
             style={{ cursor: 'pointer' }}
+            titleTypographyProps={{ variant: 'h3' }}
             subheader={`Updated: ${moment(new Date()).fromNow()}`}
           />
           <CardContent>

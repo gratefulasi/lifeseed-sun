@@ -101,6 +101,7 @@ export default function Post({ present, singleView }) {
                 </IconButton>
               }
               title={present.name}
+              titleTypographyProps={singleView ? { variant: 'h3' } : {}}
               style={{ cursor: 'pointer' }}
               subheader={moment(present.creationTime).fromNow()}
             />
