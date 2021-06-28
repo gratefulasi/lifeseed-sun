@@ -15,7 +15,8 @@ export default function SignInPage() {
   const classes = useStyles();
   return (
     <Box className={classes.signIn}>
-      <SignIn />
+      test
+      {/* <SignIn /> */}
       {/* <RequestReset /> */}
     </Box>
   );
