@@ -87,7 +87,7 @@ export default function Index() {
                 textShadow: '2px 2px 7px #004943',
               }}
             >
-              grow.
+              grow
             </Box>
           </Link>
         ) : (
