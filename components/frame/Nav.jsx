@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Nav() {
   const lifeseed = useLifeseed();
+  console.log(lifeseed)
   const classes = useStyles();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { openBasket, toggleSearch } = useApp();
