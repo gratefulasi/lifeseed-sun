@@ -42,12 +42,14 @@ const CREATE_LIFETREE_MUTATION = gql`
     $body: String
     $latitude: String
     $longitude: String
+    $planttime: String
     $image: String
   ) {
     createLifetree(
       data: {
         name: $name
         body: $body
+        planttime: $planttime
         latitude: $latitude
         longitude: $longitude
         status: "ALIVE"
@@ -58,6 +60,7 @@ const CREATE_LIFETREE_MUTATION = gql`
       name
       body
       image
+      planttime
       latitude
       longitude
     }
