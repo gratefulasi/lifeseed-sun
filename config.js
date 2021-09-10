@@ -3,5 +3,5 @@
 export const endpoint = `http://localhost:8080/api/graphql`;
 // export const endpoint = `https://lifeseed-moon.herokuapp.com/api/graphql`;
 // export const prodEndpoint = `https://lifeseed-moon.herokuapp.com/api/graphql`;
-export const prodEndpoint = `https://moon.bimbov.com/api/graphql`;
+export const prodEndpoint = `https://moon.lifeseed.online/api/graphql`;
 export const perPage = 8;
