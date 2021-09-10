@@ -3,7 +3,7 @@ import { Box, Drawer, IconButton, Paper } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { useLifeseed } from '../admin/useLifeseed';
 import formatPrice from '../../lib/formatter';
-import calcTotalPrice from '../../lib/calcTotalPrice';
+import { calcTotalPrice, calcTotalValue } from '../../lib/calcTotal';
 import { useApp } from '../../lib/appState';
 import RemoveFromBasket from './RemoveFromBasket';
 import Checkout from './Checkout';
@@ -77,6 +77,11 @@ function BasketItem({ basketItem }) {
             <br />
             <em>
               {basketItem.quantity} &times; {formatPrice(present.price)}
+              {' each'}
+            </em>
+            {formatPrice(present.value * basketItem.quantity)}
+            <em>
+              {basketItem.quantity} &times; {formatPrice(present.value)}
               {' each'}
             </em>
           </>

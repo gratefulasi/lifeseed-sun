@@ -15,20 +15,11 @@ const SEARCH_PRESENTS_QUERY = gql`
     ) {
       id
       name
+      body
       image
     }
   }
 `;
-
-// const glow = keyframes`
-//   from {
-//     box-shadow: 0 0 0px yellow;
-//   }
-
-//   to {
-//     box-shadow: 0 0 10px 1px yellow;
-//   }
-// `;
 
 const useStyles = makeStyles((theme) => ({
   ...theme.customTheme,
@@ -41,6 +32,18 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: '1px solid #e3e3e3',
     background: 'white',
     padding: '1rem',
+    transition: 'all 0.2s',
+    display: 'flex',
+    alignItems: 'center',
+    borderLeft: '7px solid',
+    '& img': {
+      marginRight: '10px',
+    },
+  },
+  dropDownItemHighlighted: {
+    borderBottom: '1px solid #e3e3e3',
+    background: 'lightyellow',
+    padding: '1.5rem',
     transition: 'all 0.2s',
     display: 'flex',
     alignItems: 'center',
@@ -116,13 +119,11 @@ export default function Search() {
         {isOpen &&
           items.map((item, index) => (
             <Box
-              className={classes.dropDownItem}
+              className={index !== highlightedIndex ? classes.dropDownItem : classes.dropDownItemHighlighted}
               key={item.id}
-              // TODO highlight
               {...getItemProps({ item })}
-              highlighted={index === highlightedIndex}
             >
-              <img src={item.image} alt={item.name} width="50" />
+              {item.image && <img src={item.image} alt={item.name} width="50" />}
               {item.name}
             </Box>
           ))}

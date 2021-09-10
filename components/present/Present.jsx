@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import Router from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
@@ -16,7 +17,6 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -26,7 +26,10 @@ import AddCommentSharp from '@material-ui/icons/AddCommentSharp';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import moment from 'moment';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import clsx from 'clsx';
 import formatPrice from '../../lib/formatter';
 import { CURRENT_LIFESEED_QUERY, useLifeseed } from '../admin/useLifeseed';
 import CommentPresent from '../common/CommentPresent';
@@ -62,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     right: '-3px',
     boxShadow: '5px 3px 3px  #FFFFFF',
   },
-  ltcTag: {
+  valueTag: {
     background: theme.palette.primary.main,
     transform: 'rotate(-3deg)',
     color: 'white',
@@ -77,40 +80,12 @@ const useStyles = makeStyles((theme) => ({
     right: '-3px',
     boxShadow: '5px 3px 3px  #FFFFFF',
   },
-  title: {
-    margin: '0 1rem',
-    textAlign: 'center',
-    transform: 'skew(-5deg) rotate(-1deg)',
-    marginTop: '-3rem',
-    textShadow: '2px 2px 0 rgba(0, 0, 0, 0.1)',
-    '& a': {
-      background: theme.palette.secondary.main,
-      display: 'inline',
-      lineHeight: '1.3',
-      fontSize: '4rem',
-      textAlign: 'center',
-      color: 'white',
-      padding: '0 1rem',
-    },
-  },
-  root: {
-    maxWidth: 340,
-    minWidth: 320,
-    margin: '1.2rem',
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-  avatar: {
-    backgroundColor: 'violet',
-    border: '1px solid lightgrey',
-  },
 }));
 
-export default function Present({ present }) {
+export default function Present({ present, singleView }) {
   const { id } = present;
   const lifeseed = useLifeseed();
+  const classes = useStyles();
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [addCommentExpanded, setAddCommentExpanded] = useState(false);
   const [commentsExpanded, setCommentsExpanded] = useState(false);
@@ -133,7 +108,7 @@ export default function Present({ present }) {
 
   const [love] = useMutation(LOVE_MUTATION, {
     variables: {
-      id: present.id,
+      id,
     },
     refetchQueries: [
       {
@@ -151,11 +126,10 @@ export default function Present({ present }) {
     refetchQueries: [{ query: CURRENT_LIFESEED_QUERY }],
   });
 
-  const classes = useStyles();
   return (
     <>
-      <Box style={{ position: 'relative', maxWidth: 350 }}>
-        <Card className={classes.root}>
+      <Box style={{ position: 'relative' }}>
+        <Card className={singleView ? classes.singleCard : classes.card}>
           <Link href={`/present/${present.id}`}>
             <CardHeader
               avatar={
@@ -172,6 +146,7 @@ export default function Present({ present }) {
                 </IconButton>
               }
               title={present.name}
+              titleTypographyProps={singleView ? { variant: 'h3' } : {}}
               style={{ cursor: 'pointer' }}
               subheader={moment(present.creationTime).fromNow()}
             />
@@ -185,7 +160,7 @@ export default function Present({ present }) {
           )}
           <CardContent>
             <Box
-              height="5rem"
+              height={singleView ? '100%' : '5rem'}
               style={{ overflow: 'hidden' }}
               dangerouslySetInnerHTML={{
                 __html: present.body,
@@ -193,6 +168,19 @@ export default function Present({ present }) {
             />
           </CardContent>
           <CardActions disableSpacing>
+            {singleView && (
+              <IconButton
+                aria-label="back"
+                variant="outlined"
+                onClick={() =>
+                  Router.push({
+                    pathname: `/presents`,
+                  })
+                }
+              >
+                <ArrowBackIosIcon />
+              </IconButton>
+            )}
             <IconButton
               aria-label="love"
               onClick={() => {
@@ -200,14 +188,11 @@ export default function Present({ present }) {
               }}
             >
               <Badge badgeContent={present.loves?.length} color="secondary">
-                {lifeseed ? (
-                  present.loves?.find(
-                    (love) => love.lifeseed?.id === lifeseed.id
-                  ) ? (
-                    <FavoriteIcon color="secondary" style={{ color: 'red' }} />
-                  ) : (
-                    <FavoriteIcon />
-                  )
+                {lifeseed &&
+                present.loves?.find(
+                  (love) => love.lifeseed?.id === lifeseed.id
+                ) ? (
+                  <FavoriteIcon color="secondary" style={{ color: 'red' }} />
                 ) : (
                   <FavoriteIcon />
                 )}
@@ -262,28 +247,45 @@ export default function Present({ present }) {
             >
               <AddShoppingCartIcon />
             </IconButton>
+            <IconButton
+              className={clsx(classes.expand, {
+                [classes.expandOpen]: commentsExpanded,
+              })}
+              onClick={handleExpandCommentsClick}
+              aria-expanded={commentsExpanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </IconButton>
           </CardActions>
           <CommentPresent
-            commentsExpanded={commentsExpanded}
+            commentsExpanded={singleView || commentsExpanded}
             addCommentExpanded={addCommentExpanded}
             present={present}
             lifeseed={lifeseed}
           />
         </Card>
-        <Box className={classes.ltcTag}>
-          {present.price / 100}{' '}
-          <IconButton
-            aria-label="settings"
-            size="small"
-            style={{
-              backgroundColor: 'yellow',
-              padding: '.3rem',
-              fontWeight: 'bold',
-              transform: 'scale(0.8)',
-            }}
-          >
-            |=|
-          </IconButton>
+        <Box className={classes.valueTag}>
+          {!present.value || present.value === '0' ? (
+            <Box padding=".3rem">Free</Box>
+          ) : (
+            <>
+              {' '}
+              {present.value / 100}{' '}
+              <IconButton
+                aria-label="settings"
+                size="small"
+                style={{
+                  backgroundColor: 'yellow',
+                  padding: '.3rem',
+                  fontWeight: 'bold',
+                  transform: 'scale(0.8)',
+                }}
+              >
+                |=|
+              </IconButton>
+            </>
+          )}
         </Box>
         <Box className={classes.priceTag}>{formatPrice(present.price)}</Box>
       </Box>

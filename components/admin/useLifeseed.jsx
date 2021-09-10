@@ -9,6 +9,7 @@ export const CURRENT_LIFESEED_QUERY = gql`
         lifetree {
           id
           image
+          planttime
         }
         name
         basket {
@@ -17,6 +18,7 @@ export const CURRENT_LIFESEED_QUERY = gql`
           present {
             id
             image
+            value
             price
             name
             body

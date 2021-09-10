@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  lifeseed-ui:
+    container_name: lifeseed-sun
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports: ["80:80"]
+

@@ -24,7 +24,8 @@ export default function Menu({ lifeseed, openBasket, toggleSearch, signout }) {
       <Link href="/presents">
         <IconButton
           style={{
-            color: window.location.pathname === '/presents' && selectedColor,
+            color:
+              window.location.pathname.includes('/presents') && selectedColor,
           }}
         >
           <StorefrontIcon />
@@ -38,7 +39,8 @@ export default function Menu({ lifeseed, openBasket, toggleSearch, signout }) {
           <Link href="/posts">
             <IconButton
               style={{
-                color: window.location.pathname === '/posts' && selectedColor,
+                color:
+                  window.location.pathname.includes('/posts') && selectedColor,
               }}
             >
               <ForumIcon />
@@ -73,7 +75,8 @@ export default function Menu({ lifeseed, openBasket, toggleSearch, signout }) {
           <Link href="/map">
             <IconButton
               style={{
-                color: window.location.pathname === '/map' && selectedColor,
+                color:
+                  window.location.pathname.includes('/map') && selectedColor,
               }}
             >
               <MapIcon />
@@ -87,7 +90,8 @@ export default function Menu({ lifeseed, openBasket, toggleSearch, signout }) {
           <Link href="/vault">
             <IconButton
               style={{
-                color: window.location.pathname === '/vault' && selectedColor,
+                color:
+                  window.location.pathname.includes('/vault') && selectedColor,
               }}
             >
               <AccountBalanceWalletIcon />

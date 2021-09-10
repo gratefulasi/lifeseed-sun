@@ -20,6 +20,7 @@ const SINGLE_PACKAGE_QUERY = gql`
         name
         body
         price
+        value
         quantity
         image
       }
@@ -105,7 +106,9 @@ export default function SinglePackagePage({ query }) {
               <h2>{item.name}</h2>
               <p>Qty: {item.quantity}</p>
               <p>Each: {formatPrice(item.price)}</p>
+              <p>Each (|=|): {formatPrice(item.value)}</p>
               <p>Sub Total: {formatPrice(item.price * item.quantity)}</p>
+              <p>Sub Total (|=|): {formatPrice(item.value * item.quantity)}</p>
               <p>{item.body}</p>
             </div>
           </div>

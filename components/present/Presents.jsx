@@ -31,7 +31,7 @@ export default function Presents({ page }) {
   if (error) return <Box>Error: {error.message}</Box>;
   return (
     <Box className={classes.space}>
-      <Grid container spacing={1} display="flex" justifyContent="center">
+      <Grid container spacing={1} className={classes.presentList}>
         {data?.allPresents.map((present) => (
           <Present key={present.id} present={present} />
         ))}
