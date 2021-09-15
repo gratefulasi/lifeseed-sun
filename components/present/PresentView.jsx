@@ -3,7 +3,8 @@ import { useQuery } from '@apollo/client';
 import Head from 'next/head';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, LinearProgress } from '@material-ui/core';
-import { SINGLE_PRESENT_QUERY } from '../common/PresentMutations';
+import { useLifeseed } from '../admin/useLifeseed';
+import { SINGLE_PRESENT_QUERY, SINGLE_PRESENT_QUERY_LIGHT } from '../common/PresentMutations';
 import Present from './Present';
 
 const useStyles = makeStyles((theme) => ({
@@ -12,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PresentView({ id }) {
   const classes = useStyles();
-  const { data, loading, error } = useQuery(SINGLE_PRESENT_QUERY, {
+  const lifeseed = useLifeseed();
+  const { data, loading, error } = useQuery(lifeseed ? SINGLE_PRESENT_QUERY : SINGLE_PRESENT_QUERY_LIGHT, {
     variables: { id },
   });
   if (loading) return <LinearProgress color="secondary" />;
