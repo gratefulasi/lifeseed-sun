@@ -18,7 +18,7 @@ export default function PresentView({ id }) {
     variables: { id },
   });
   if (loading) return <LinearProgress color="secondary" />;
-  if (error) return <Box className={classes.error} error={error} />;
+  // if (error) return <Box className={classes.error} error={error} />;
   const { present } = data;
   return (
     <>
