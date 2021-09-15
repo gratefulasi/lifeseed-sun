@@ -138,6 +138,20 @@ export const SINGLE_PRESENT_QUERY = gql`
   }
 `;
 
+export const SINGLE_PRESENT_QUERY_LIGHT = gql`
+  query SINGLE_PRESENT_QUERY($id: ID!) {
+    present: Present(where: { id: $id }) {
+      body
+      creationTime
+      id
+      image
+      price
+      value
+      name
+    }
+  }
+`;
+
 export function update(cache, payload) {
   cache.evict(cache.identify(payload.data.deletePresent));
 }
