@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client';
 import Head from 'next/head';
-import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
+import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Box,
@@ -25,6 +26,12 @@ import {
 } from '../common/PresentMutations';
 import { PAGINATION_QUERY } from '../utils/Pagination';
 import { perPage } from '../../config';
+import { joditConfig } from '../../lib/theme';
+
+const importJodit = () => import('jodit-react');
+const JoditEditor = dynamic(importJodit, {
+  ssr: false,
+});
 
 const useStyles = makeStyles((theme) => ({
   ...theme.customTheme,
@@ -34,8 +41,10 @@ export default function PresentCreate() {
   const { t } = useTranslation();
   const classes = useStyles();
   const [image, setImage] = useState();
+  const editor = useRef(null);
   const now = new Date().toISOString();
-
+  const [content, setContent] = useState('');
+  
   const { inputs, handleChange, clearForm, resetForm } = useForm({
     name: '',
     image: '',
@@ -47,7 +56,7 @@ export default function PresentCreate() {
   const [createPresent, { data, error, loading }] = useMutation(
     CREATE_PRESENT_MUTATION,
     {
-      variables: { ...inputs, image, creationTime: now, type: 'OFFER' },
+      variables: { ...inputs, image, body: content, creationTime: now, type: 'OFFER' },
       refetchQueries: [
         {
           query: ALL_PRESENTS_QUERY,
@@ -130,20 +139,15 @@ export default function PresentCreate() {
                     variant="outlined"
                     className={classes.field}
                   />
-                  <TextField
-                    aria-label={t('Body')}
-                    label={t('Body')}
-                    id="body"
-                    name="body"
-                    size="small"
-                    value={inputs.body}
-                    onChange={handleChange}
-                    multiline
-                    rows={7}
-                    variant="outlined"
-                    className={classes.field}
-                  />
                 </Grid>
+                <JoditEditor
+                    ref={editor}
+                    value={content}
+                    config={joditConfig({ readonly: false })}
+                    tabIndex={1} // tabIndex of textarea
+                    onBlur={(newContent) => setContent(newContent)}
+                    onChange={(newContent) => {}}
+                  />
               </CardContent>
               <CardActions disableSpacing>
                 <Button
