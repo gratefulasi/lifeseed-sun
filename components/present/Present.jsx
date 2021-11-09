@@ -181,82 +181,86 @@ export default function Present({ present, singleView }) {
                 <ArrowBackIosIcon />
               </IconButton>
             )}
-            <IconButton
-              aria-label="love"
-              onClick={() => {
-                love().catch((err) => alert(err.message));
-              }}
-            >
-              <Badge badgeContent={present.loves?.length} color="secondary">
-                {lifeseed &&
-                present.loves?.find(
-                  (love) => love.lifeseed?.id === lifeseed.id
-                ) ? (
-                  <FavoriteIcon color="secondary" style={{ color: 'red' }} />
-                ) : (
-                  <FavoriteIcon />
-                )}
-              </Badge>
-            </IconButton>
-            <Tooltip title="Comment on post">
-              <IconButton
-                aria-label="Comment"
-                onClick={handleExpandCommentsClick}
-              >
-                <Badge
-                  badgeContent={present.comments?.length}
-                  color="secondary"
-                >
-                  <ForumIcon />
-                </Badge>
-              </IconButton>
-            </Tooltip>
-            <IconButton aria-label="Comment" onClick={handleAddCommentClick}>
-              <AddCommentSharp />
-            </IconButton>
-            {lifeseed && present?.lifeseed?.id === lifeseed.id && (
+            {lifeseed &&
               <>
                 <IconButton
-                  aria-label="delete"
+                  aria-label="love"
+                  onClick={() => {
+                    love().catch((err) => alert(err.message));
+                  }}
+                >
+                  <Badge badgeContent={present.loves?.length} color="secondary">
+                    {lifeseed &&
+                      present.loves?.find(
+                        (love) => love.lifeseed?.id === lifeseed.id
+                      ) ? (
+                      <FavoriteIcon color="secondary" style={{ color: 'red' }} />
+                    ) : (
+                      <FavoriteIcon />
+                    )}
+                  </Badge>
+                </IconButton>
+                <Tooltip title="Comment on post">
+                  <IconButton
+                    aria-label="Comment"
+                    onClick={handleExpandCommentsClick}
+                  >
+                    <Badge
+                      badgeContent={present.comments?.length}
+                      color="secondary"
+                    >
+                      <ForumIcon />
+                    </Badge>
+                  </IconButton>
+                </Tooltip>
+                <IconButton aria-label="Comment" onClick={handleAddCommentClick}>
+                  <AddCommentSharp />
+                </IconButton>
+                {present?.lifeseed?.id === lifeseed.id && (
+                  <>
+                    <IconButton
+                      aria-label="delete"
+                      disabled={loading}
+                      variant="outlined"
+                      onClick={() => {
+                        setConfirmOpen(true);
+                      }}
+                    >
+                      <DeleteOutlineIcon />
+                    </IconButton>
+                    <Link
+                      href={{
+                        pathname: '/updatePresent',
+                        query: {
+                          id: present.id,
+                        },
+                      }}
+                    >
+                      <IconButton>
+                        <EditIcon />
+                      </IconButton>
+                    </Link>
+                  </>
+                )}
+                <IconButton
                   disabled={loading}
                   variant="outlined"
-                  onClick={() => {
-                    setConfirmOpen(true);
-                  }}
+                  onClick={addToBasket}
                 >
-                  <DeleteOutlineIcon />
+                  <AddShoppingCartIcon />
                 </IconButton>
-                <Link
-                  href={{
-                    pathname: '/updatePresent',
-                    query: {
-                      id: present.id,
-                    },
-                  }}
+                <IconButton
+                  className={clsx(classes.expand, {
+                    [classes.expandOpen]: commentsExpanded,
+                  })}
+                  onClick={handleExpandCommentsClick}
+                  aria-expanded={commentsExpanded}
+                  aria-label="show more"
                 >
-                  <IconButton>
-                    <EditIcon />
-                  </IconButton>
-                </Link>
+                  <ExpandMoreIcon />
+                </IconButton>
               </>
-            )}
-            <IconButton
-              disabled={loading}
-              variant="outlined"
-              onClick={addToBasket}
-            >
-              <AddShoppingCartIcon />
-            </IconButton>
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: commentsExpanded,
-              })}
-              onClick={handleExpandCommentsClick}
-              aria-expanded={commentsExpanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
+            }
           </CardActions>
           <CommentPresent
             commentsExpanded={singleView || commentsExpanded}

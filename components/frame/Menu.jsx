@@ -31,9 +31,9 @@ export default function Menu({ lifeseed, openBasket, toggleSearch, signout }) {
           <StorefrontIcon />
         </IconButton>
       </Link>
-      <IconButton onClick={toggleSearch}>
+      {/* <IconButton onClick={toggleSearch}>
         <SearchIcon />
-      </IconButton>
+      </IconButton> */}
       {lifeseed && (
         <>
           <Link href="/posts">
