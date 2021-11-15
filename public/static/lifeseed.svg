@@ -9,13 +9,13 @@
         .circle {
             fill: none;
             stroke: #555;
-            stroke-width: .3;
+            stroke-width: .7;
         }
 
         .innerCircle {
             fill: white;
             stroke: #555;
-            stroke-width: 1.7;
+            stroke-width: 3;
         }
     </style>
     <defs>

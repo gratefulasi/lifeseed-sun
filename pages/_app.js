@@ -16,13 +16,14 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-function MyApp({ Component, pageProps, apollo }) {
+function lifeseed({ Component, pageProps, apollo }) {
   React.useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
+  const classes = useStyles();
 
   return (
     <>
@@ -45,13 +46,13 @@ function MyApp({ Component, pageProps, apollo }) {
   );
 }
 
-MyApp.propTypes = {
+lifeseed.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.object.isRequired,
   apollo: PropTypes.object.isRequired,
 };
 
-MyApp.getInitialProps = async function ({ Component, ctx }) {
+lifeseed.getInitialProps = async function ({ Component, ctx }) {
   let pageProps = {};
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
@@ -60,4 +61,4 @@ MyApp.getInitialProps = async function ({ Component, ctx }) {
   return { pageProps };
 };
 
-export default withData(MyApp);
+export default withData(lifeseed);

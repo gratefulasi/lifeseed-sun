@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function PresentsPage() {
+export default function MainPage() {
     const classes = useStyles();
     const { query } = useRouter();
     const page = parseInt(query.page);
