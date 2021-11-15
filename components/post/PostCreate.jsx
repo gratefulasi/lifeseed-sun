@@ -68,7 +68,6 @@ export default function PostCreate() {
       awaitRefetchQueries: true,
     }
   );
-  console.log(createPresent);
   const editor = useRef(null);
 
   return (

@@ -62,9 +62,7 @@ export default function SignIn() {
   });
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(inputs);
     const res = await signin();
-    console.log(res);
     if (res?.data?.authenticateLifeseedWithPassword?.code !== 'FAILURE')
       router.push('/');
     resetForm();

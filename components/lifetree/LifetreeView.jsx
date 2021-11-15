@@ -45,7 +45,6 @@ export default function LifetreeView({ id }) {
   if (loading) return <CircularProgress />;
   if (error) return <Box className={classes.error} error={error} />;
   const { Lifetree } = data;
-  console.log(Lifetree);
   return (
     <>
       <Head>
