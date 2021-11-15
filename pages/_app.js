@@ -23,7 +23,6 @@ function lifeseed({ Component, pageProps, apollo }) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
-  const classes = useStyles();
 
   return (
     <>
