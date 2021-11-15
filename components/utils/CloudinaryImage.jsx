@@ -45,13 +45,10 @@ export default function cloudinaryImage({ setImage, style }) {
   const beginUpload = () => {
     openUploadWidget((error, photos) => {
       if (!error) {
-        console.log(photos);
         if (photos.event === 'success') {
           setImage(photos.info.secure_url);
-          console.log(photos.info);
         }
       } else {
-        console.log(error);
       }
     });
   };

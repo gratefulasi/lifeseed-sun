@@ -75,7 +75,6 @@ export default function PresentCreate() {
     }
   );
 
-  console.log(createPresent);
   return (
     <>
       <Head>

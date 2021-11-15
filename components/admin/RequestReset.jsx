@@ -54,10 +54,7 @@ export default function RequestReset() {
   );
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(inputs);
     const res = await requestReset().catch(console.error);
-    console.log(res);
-    console.log({ data, loading, error });
     resetForm();
   }
 

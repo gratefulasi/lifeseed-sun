@@ -61,10 +61,7 @@ export default function Reset({ token }) {
   });
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(inputs);
     const res = await reset().catch(console.error);
-    console.log(res);
-    console.log({ data, loading });
     resetForm();
   }
   const goodError = data?.redeemLifeseedPasswordResetToken?.code

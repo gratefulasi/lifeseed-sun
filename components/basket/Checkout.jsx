@@ -67,7 +67,6 @@ function CheckoutForm() {
       type: 'card',
       card: elements.getElement(CardElement),
     });
-    console.log(paymentMethod);
     if (error) {
       setError(error);
       nProgress.done();
@@ -79,9 +78,6 @@ function CheckoutForm() {
         token: paymentMethod.id,
       },
     });
-
-    console.log(`Finished the myP`);
-    console.log(myPackage);
 
     router.push({
       pathname: `/package/[id]`,
