@@ -5,6 +5,7 @@ import Nav from './Nav';
 import Search from '../utils/Search';
 import Lifecircle from './Lifecircle';
 import Lifeseed from './Lifeseed';
+import Title from './Title';
 import { useApp } from '../../lib/appState';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +28,7 @@ export default function Header() {
         <>
           <Lifecircle />
           <Lifeseed />
+          <Title/>
         </>
         <Nav />
       </Box>

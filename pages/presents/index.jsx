@@ -5,6 +5,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { makeStyles } from '@material-ui/core/styles';
 import Presents from '../../components/present/Presents';
 import Pagination from '../../components/utils/Pagination';
+import { useApp } from '../../lib/appState';
 
 const useStyles = makeStyles((theme) => ({
   ...theme.customTheme,
@@ -19,6 +20,8 @@ export default function PresentsPage() {
   const classes = useStyles();
   const { query } = useRouter();
   const page = parseInt(query.page);
+  const { setTitle } = useApp();
+  setTitle("the market");
   return (
     <Box style={{ paddingRight: '.7rem' }}>
       <Box className={classes.toolbar}>

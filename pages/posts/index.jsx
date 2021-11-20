@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Posts from '../../components/post/Posts';
 import Pagination from '../../components/utils/Pagination';
 import SignInChecker from '../../components/admin/SignInChecker';
+import { useApp } from '../../lib/appState';
 
 const useStyles = makeStyles((theme) => ({
   ...theme.customTheme,
@@ -20,6 +21,9 @@ export default function PresentsPage() {
   const { query } = useRouter();
   const classes = useStyles();
   const page = parseInt(query.page);
+  const { setTitle } = useApp();
+  setTitle("the forum");
+
   return (
     <SignInChecker>
       <Box style={{ paddingRight: '.7rem' }}>
