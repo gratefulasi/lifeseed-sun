@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     height: 'fit-content',
+    padding: '.7rem 0 0 0',
   },
 }));
 

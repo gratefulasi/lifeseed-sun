@@ -131,7 +131,7 @@ export default function CommentPresent(props) {
               >
                 <img
                   src={comment.lifeseed?.lifetree?.image}
-                  style={{ height: '100%' }}
+                  style={{ height: '137%' }}
                 />
               </Avatar>
               <Box

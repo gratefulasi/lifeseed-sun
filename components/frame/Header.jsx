@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   header: {
     alignItems: 'stretch',
     display: 'grid',
-    gridTemplateColumns: 'auto 1fr 1fr',
+    gridTemplateColumns: 'auto 1fr 1fr auto',
     justifyContent: 'space-between',
     padding: '.7rem',
   },
