@@ -1,2 +1,16 @@
-# If facing memory issues try 
-export NODE_OPTIONS="--max-old-space-size=8192"
+# lifeseed-sun
+
+Repository for lifeseed sun
+
+## Folder structure
+
+### [public](public/)
+
+The folder contains the following resources:
+
+- **[locales](public/locales)**
+  - i18n resources
+
+### 2. Build steps
+
+``TODO``
