@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import gql from 'graphql-tag';
 import SignInChecker from '../components/admin/SignInChecker';
+import { useApp } from '../lib/appState';
 
 export const ALL_LIFETREES_QUERY = gql`
   query {
@@ -18,6 +19,8 @@ export const ALL_LIFETREES_QUERY = gql`
 `;
 
 export default function MapPage() {
+  const { setTitle } = useApp();
+  setTitle("the map");
   const { data, error, loading } = useQuery(ALL_LIFETREES_QUERY);
 
   if (loading) return <p>Loading...</p>;

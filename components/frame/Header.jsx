@@ -5,6 +5,7 @@ import Nav from './Nav';
 import Search from '../utils/Search';
 import Lifecircle from './Lifecircle';
 import Lifeseed from './Lifeseed';
+import Title from './Title';
 import { useApp } from '../../lib/appState';
 
 const useStyles = makeStyles((theme) => ({
@@ -12,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   header: {
     alignItems: 'stretch',
     display: 'grid',
-    gridTemplateColumns: 'auto 1fr 1fr',
+    gridTemplateColumns: 'auto 1fr 1fr auto',
     justifyContent: 'space-between',
     padding: '.7rem',
   },
@@ -27,6 +28,7 @@ export default function Header() {
         <>
           <Lifecircle />
           <Lifeseed />
+          <Title/>
         </>
         <Nav />
       </Box>

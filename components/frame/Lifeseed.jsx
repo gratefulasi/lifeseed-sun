@@ -7,13 +7,6 @@ import { useLifeseed } from '../admin/useLifeseed';
 
 const useStyles = makeStyles((theme) => ({
   ...theme.customTheme,
-  lifeseed: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    justifyContent: 'space-between',
-    marginLeft: '.7rem',
-    padding: '.7rem',
-  },
 }));
 
 function Lifeseed() {
@@ -31,7 +24,7 @@ function Lifeseed() {
         {lifeseed ? (
           <Avatar aria-label="lifetree" className={classes.avatar}>
             {lifeseed?.lifetree?.image ? (
-              <img src={lifeseed?.lifetree?.image} style={{ height: '100%' }} />
+              <img src={lifeseed?.lifetree?.image} style={{ height: '137%' }} />
             ) : (
               <IconButton style={{ backgroundColor: '#fff' }}>
                 <NaturePeopleOutlinedIcon />

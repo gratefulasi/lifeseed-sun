@@ -156,7 +156,7 @@ export default function PresentUpdate({ id }) {
                 <Avatar aria-label="lifetree" className={classes.avatar}>
                   <img
                     src={data.Present?.lifeseed?.lifetree?.image}
-                    style={{ height: '100%' }}
+                    style={{ height: '137%' }}
                   />
                 </Avatar>
               }

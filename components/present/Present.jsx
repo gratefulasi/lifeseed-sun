@@ -136,7 +136,7 @@ export default function Present({ present, singleView }) {
                 <Avatar aria-label="lifetree" className={classes.avatar}>
                   <img
                     src={present.lifeseed?.lifetree?.image}
-                    style={{ height: '100%' }}
+                    style={{ height: '137%' }}
                   />
                 </Avatar>
               }

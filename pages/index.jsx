@@ -5,6 +5,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { makeStyles } from '@material-ui/core/styles';
 import Presents from '../components/present/Presents';
 import Pagination from '../components/utils/Pagination';
+import { useApp } from '../lib/appState';
 
 const useStyles = makeStyles((theme) => ({
     ...theme.customTheme,
@@ -18,6 +19,8 @@ const useStyles = makeStyles((theme) => ({
 export default function MainPage() {
     const classes = useStyles();
     const { query } = useRouter();
+    const { setTitle } = useApp();
+    setTitle("lifeseed");
     const page = parseInt(query.page);
     return (
         <Box style={{ paddingRight: '.7rem' }}>
