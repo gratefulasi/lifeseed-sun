@@ -2,6 +2,9 @@
 
 Repository for lifeseed sun
 
+# install modules
+npm install --legacy-peer-deps
+
 ## Folder structure
 
 ### [public](public/)
