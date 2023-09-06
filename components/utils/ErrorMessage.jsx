@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
 const DisplayError = ({ error }) => {
   const classes = useStyles();
   if (!error || !error.message) return null;
+  if (error?.graphQLErrors && error?.graphQLErrors[0]?.message?.includes('E11000')) {
+    error = { message: 'Email already exists!' };
+  }
   if (
     error.networkError &&
     error.networkError.result &&

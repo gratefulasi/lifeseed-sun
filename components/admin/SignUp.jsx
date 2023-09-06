@@ -57,13 +57,20 @@ export default function SignUp() {
     variables: inputs,
     refetchQueries: [{ query: CURRENT_LIFESEED_QUERY }],
   });
+
   async function handleSubmit(e) {
     e.preventDefault();
-    const res = await signup().catch(console.error);
-    if (res?.data?.authenticateLifeseedWithPassword?.code !== 'FAILURE')
+    const res = await signup().catch(
+      console.log("res in catch:", res)
+    );
+
+    if (res?.data?.authenticateLifeseedWithPassword?.code !== 'FAILURE') {
       router.push('/signin');
-    resetForm();
+    }
+    //resetForm();
+    
   }
+  //console.dir(error?.graphQLErrors[0].message.contains('E11000'))
 
   return (
     <>
@@ -134,6 +141,7 @@ export default function SignUp() {
                 error={!!inputs.password}
                 onChange={handleChange}
                 size="small"
+                minLength="12"
               />
               <TextField
                 variant="outlined"
