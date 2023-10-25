@@ -13,10 +13,10 @@ import {
   LinearProgress,
   TextField,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import gql from 'graphql-tag';
 import Router from 'next/router';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import useForm from '../../lib/useForm';
 import CloudinaryImage from '../utils/CloudinaryImage';
 import DisplayError from '../utils/ErrorMessage';

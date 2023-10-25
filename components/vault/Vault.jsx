@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import { makeStyles } from '@material-ui/core/styles';
-import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
-import ExtensionIcon from '@material-ui/icons/Extension';
-import ReceiptIcon from '@material-ui/icons/Receipt';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { makeStyles } from '@mui/styles';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import ExtensionIcon from '@mui/icons-material/Extension';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {
   Avatar,
   Box,
@@ -18,9 +18,9 @@ import {
   IconButton,
   CircularProgress,
   Typography,
-} from '@material-ui/core';
-import SendIcon from '@material-ui/icons/Send';
-import NaturePeopleOutlinedIcon from '@material-ui/icons/NaturePeopleOutlined';
+} from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
+import NaturePeopleOutlinedIcon from '@mui/icons-material/NaturePeopleOutlined';
 import moment from 'moment';
 import { useLifeseed } from '../admin/useLifeseed';
 

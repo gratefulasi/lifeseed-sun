@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import gql from 'graphql-tag';
 import Head from 'next/head';
-import { Box, Button } from '@material-ui/core';
+import { Box, Button } from '@mui/material';
 import Link from 'next/link';
 import ErrorMessage from '../components/utils/ErrorMessage';
 import formatPrice from '../lib/formatter';

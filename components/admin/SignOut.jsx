@@ -1,8 +1,8 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
-import { Button } from '@material-ui/core';
-import ExitToApp from '@material-ui/icons/ExitToApp';
-import { makeStyles } from '@material-ui/core/styles';
+import { Button } from '@mui/material';
+import ExitToApp from '@mui/icons-material/ExitToApp';
+import { makeStyles } from '@mui/styles';
 import { CURRENT_LIFESEED_QUERY } from './useLifeseed';
 
 const SIGNOUT_MUTATION = gql`

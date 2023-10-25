@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/client';
-import { Box } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { resetIdCounter, useCombobox } from 'downshift';
 import gql from 'graphql-tag';
 import { debounce } from 'lodash';
@@ -83,7 +83,6 @@ export default function Search() {
     inputValue,
     getMenuProps,
     getInputProps,
-    getComboboxProps,
     getItemProps,
     highlightedIndex,
   } = useCombobox({
@@ -104,7 +103,7 @@ export default function Search() {
   });
   return (
     <Box className={classes.search}>
-      <div {...getComboboxProps()}>
+      <div>
         <input
           {...getInputProps({
             type: 'search',

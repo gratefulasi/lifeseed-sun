@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
-import { makeStyles } from '@material-ui/core/styles';
-import { Box, Grid } from '@material-ui/core';
-import LinearProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@mui/styles';
+import { Box, Grid } from '@mui/material';
+import LinearProgress from '@mui/material/CircularProgress';
 import { perPage } from '../../config';
 import Present from './Present';
 import { useLifeseed } from '../admin/useLifeseed';

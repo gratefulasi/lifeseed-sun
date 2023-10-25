@@ -1,5 +1,5 @@
-import { Box, Collapse } from '@material-ui/core';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import { Box, Collapse } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import Basket from '../basket/Basket';
 import Nav from './Nav';
 import Search from '../utils/Search';

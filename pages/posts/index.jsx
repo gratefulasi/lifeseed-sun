@@ -1,8 +1,8 @@
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
-import { Box, IconButton } from '@material-ui/core';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import { makeStyles } from '@material-ui/core/styles';
+import { Box, IconButton } from '@mui/material';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { makeStyles } from '@mui/styles';
 import Posts from '../../components/post/Posts';
 import Pagination from '../../components/utils/Pagination';
 import SignInChecker from '../../components/admin/SignInChecker';

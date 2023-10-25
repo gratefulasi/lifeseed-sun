@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import gql from 'graphql-tag';
 import Head from 'next/head';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {
   Avatar,
   Backdrop,
@@ -19,10 +19,10 @@ import {
   CardHeader,
   Typography,
   TextField,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import Router from 'next/router';
-import { ArrowBack } from '@material-ui/icons';
+import { ArrowBack } from '@mui/icons-material';
 import moment from 'moment';
 import useForm from '../../lib/useForm';
 import DisplayError from '../utils/ErrorMessage';

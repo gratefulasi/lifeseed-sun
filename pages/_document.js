@@ -1,9 +1,47 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheets } from '@material-ui/core/styles';
+import createEmotionServer from '@emotion/server/create-instance';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
 import theme from '../lib/theme';
 
-export default class MyDocument extends Document {
+const getCache = () => {
+  const cache = createCache({ key: 'css', prepend: true });
+  cache.compat = true;
+  return cache;
+};
+
+class MyDocument extends Document {
+  static async getInitialProps(ctx) {
+    const cache = getCache();
+    const { extractCriticalToChunks } = createEmotionServer(cache);
+    const originalRenderPage = ctx.renderPage;
+
+    ctx.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: (App) => (props) => (
+          <CacheProvider value={cache}>
+            <App {...props} />
+          </CacheProvider>
+        ),
+      });
+
+    const initialProps = await Document.getInitialProps(ctx);
+    const emotionStyles = extractCriticalToChunks(initialProps.html);
+    const emotionStyleTags = emotionStyles.styles.map((style) => (
+      <style
+        data-emotion={`${style.key} ${style.ids.join(' ')}`}
+        key={style.key}
+        dangerouslySetInnerHTML={{ __html: style.css }}
+      />
+    ));
+
+    return {
+      ...initialProps,
+      styles: [...React.Children.toArray(initialProps.styles), ...emotionStyleTags],
+    };
+  }
+
   render() {
     return (
       <Html lang="en">
@@ -35,22 +73,4 @@ export default class MyDocument extends Document {
   }
 }
 
-MyDocument.getInitialProps = async (ctx) => {
-  const sheets = new ServerStyleSheets();
-  const originalRenderPage = ctx.renderPage;
-
-  ctx.renderPage = () =>
-    originalRenderPage({
-      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
-    });
-
-  const initialProps = await Document.getInitialProps(ctx);
-
-  return {
-    ...initialProps,
-    styles: [
-      ...React.Children.toArray(initialProps.styles),
-      sheets.getStyleElement(),
-    ],
-  };
-};
+export default MyDocument;

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Head from 'next/head';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import {
   Box,
   Button,
@@ -14,9 +14,9 @@ import {
   Grid,
   IconButton,
   Typography,
-} from '@material-ui/core';
-import MapIcon from '@material-ui/icons/Map';
-import NatureIcon from '@material-ui/icons/Nature';
+} from '@mui/material';
+import MapIcon from '@mui/icons-material/Map';
+import NatureIcon from '@mui/icons-material/Nature';
 // import LifetreePosition from './LifetreePosition';
 
 const useStyles = makeStyles((theme) => ({

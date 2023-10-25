@@ -1,8 +1,8 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import Head from 'next/head';
-import { makeStyles } from '@material-ui/core/styles';
-import { Box, LinearProgress } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Box, LinearProgress } from '@mui/material';
 import { SINGLE_PRESENT_QUERY } from '../common/PresentMutations';
 import Post from './Post';
 

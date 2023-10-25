@@ -6,9 +6,9 @@ import {
   IconButton,
   useMediaQuery,
   useTheme,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import MenuIcon from '@mui/icons-material/Menu';
 import gql from 'graphql-tag';
 import { useApp } from '../../lib/appState';
 import { useLifeseed, CURRENT_LIFESEED_QUERY } from '../admin/useLifeseed';

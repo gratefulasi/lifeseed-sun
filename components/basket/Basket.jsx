@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles';
-import { Box, Drawer, IconButton, Paper } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import { makeStyles } from '@mui/styles';
+import { Box, Drawer, IconButton, Paper } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { useLifeseed } from '../admin/useLifeseed';
 import formatPrice from '../../lib/formatter';
 import { calcTotalPrice, calcTotalValue } from '../../lib/calcTotal';

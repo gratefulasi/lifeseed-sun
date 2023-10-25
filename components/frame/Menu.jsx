@@ -1,19 +1,19 @@
 import Link from 'next/link';
-import { Badge, IconButton } from '@material-ui/core';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import StorefrontIcon from '@material-ui/icons/Storefront';
-import AllInboxIcon from '@material-ui/icons/AllInbox';
-import TransitEnterexitIcon from '@material-ui/icons/TransitEnterexit';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import NatureIcon from '@material-ui/icons/Nature';
-import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
-import ForumIcon from '@material-ui/icons/Forum';
-import MapIcon from '@material-ui/icons/Map';
-import LanguageIcon from '@material-ui/icons/Language';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import SearchIcon from '@material-ui/icons/Search';
-import ExitToApp from '@material-ui/icons/ExitToApp';
-import { useTheme } from '@material-ui/core/styles';
+import { Badge, IconButton } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import AllInboxIcon from '@mui/icons-material/AllInbox';
+import TransitEnterexitIcon from '@mui/icons-material/TransitEnterexit';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import NatureIcon from '@mui/icons-material/Nature';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import ForumIcon from '@mui/icons-material/Forum';
+import MapIcon from '@mui/icons-material/Map';
+import LanguageIcon from '@mui/icons-material/Language';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import SearchIcon from '@mui/icons-material/Search';
+import ExitToApp from '@mui/icons-material/ExitToApp';
+import { useTheme } from '@mui/styles';
 
 export default function Menu({ lifeseed, openBasket, toggleSearch, signout }) {
   const theme = useTheme();

@@ -1,6 +1,6 @@
 import { CloudinaryContext } from 'cloudinary-react';
-import { IconButton } from '@material-ui/core';
-import PhotoIcon from '@material-ui/icons/PhotoCameraOutlined';
+import { IconButton } from '@mui/material';
+import PhotoIcon from '@mui/icons-material/PhotoCameraOutlined';
 
 export const openUploadWidget = (callback) => {
   window.cloudinary.openUploadWidget(

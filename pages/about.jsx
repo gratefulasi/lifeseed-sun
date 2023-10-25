@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import { Box } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useLifeseed } from '../components/admin/useLifeseed';
 

@@ -14,11 +14,11 @@ import {
   IconButton,
   Typography,
   TextField,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import Router from 'next/router';
-import { ArrowBack } from '@material-ui/icons';
-import NatureIcon from '@material-ui/icons/Nature';
+import { ArrowBack } from '@mui/icons-material';
+import NatureIcon from '@mui/icons-material/Nature';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import useForm from '../../lib/useForm';
 import DisplayError from '../utils/ErrorMessage';

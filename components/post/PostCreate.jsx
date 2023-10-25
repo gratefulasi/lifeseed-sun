@@ -11,11 +11,11 @@ import {
   Grid,
   LinearProgress,
   TextField,
-} from '@material-ui/core';
+} from '@mui/material';
 import Router from 'next/router';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import React, { useState, useRef } from 'react';
-import { ArrowBack } from '@material-ui/icons';
+import { ArrowBack } from '@mui/icons-material';
 import DisplayError from '../utils/ErrorMessage';
 import { perPage } from '../../config';
 import useForm from '../../lib/useForm';

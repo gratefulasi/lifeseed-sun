@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import {
   Box,
   Dialog,
@@ -11,24 +11,24 @@ import {
   Avatar,
   Badge,
   Tooltip,
-} from '@material-ui/core';
+} from '@mui/material';
 import React, { useState } from 'react';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import EditIcon from '@material-ui/icons/Edit';
-import ForumIcon from '@material-ui/icons/Forum';
-import AddCommentSharp from '@material-ui/icons/AddCommentSharp';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import EditIcon from '@mui/icons-material/Edit';
+import ForumIcon from '@mui/icons-material/Forum';
+import AddCommentSharp from '@mui/icons-material/AddCommentSharp';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import moment from 'moment';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import clsx from 'clsx';
 import formatPrice from '../../lib/formatter';
 import { CURRENT_LIFESEED_QUERY, useLifeseed } from '../admin/useLifeseed';

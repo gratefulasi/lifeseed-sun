@@ -1,8 +1,8 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import Head from 'next/head';
-import { makeStyles } from '@material-ui/core/styles';
-import { Box, LinearProgress } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Box, LinearProgress } from '@mui/material';
 import { useLifeseed } from '../admin/useLifeseed';
 import { SINGLE_PRESENT_QUERY, SINGLE_PRESENT_QUERY_LIGHT } from '../common/PresentMutations';
 import Present from './Present';
